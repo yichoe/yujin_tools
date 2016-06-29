@@ -1,7 +1,7 @@
 - hosts: 
    - gocart-server
    - gocart-servertest
-  strategy: debug
+  #strategy: debug
   tasks:
     - name: 'Ensure that we can connect to this host'
       ping:
@@ -20,6 +20,9 @@
       -  ntp.ubuntu.com
    #- balcony
    #- ros_concert
+   - role: tersmitten.supervisor
+     tags: supervisor
+     become: yes
    - role: syncthing
      tags: syncthing
      become: yes

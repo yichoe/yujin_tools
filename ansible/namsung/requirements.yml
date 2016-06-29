@@ -1,4 +1,5 @@
  - geerlingguy.ntp
+ - tersmitten.supervisor
  - src: https://github.com/asmodehn/ansible-syncthing-debian.git
    version: master
    name: syncthing-role
