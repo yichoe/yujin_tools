@@ -1,0 +1,5 @@
+- hosts: gocarts
+  roles:
+   - common
+   - ros_install
+   - ros_gopher

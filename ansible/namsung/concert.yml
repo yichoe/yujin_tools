@@ -1,0 +1,23 @@
+- hosts: 
+   - gocart-server
+   - gocart-servertest
+  strategy: debug
+  roles:
+   - role: geerlingguy.ntp
+     tags: ntp
+     become: yes
+     ntp_enabled: true
+     ntp_timezone: Etc/UTC
+     ntp_manage_config: true
+     ntp_servers: 
+      -  0.ubuntu.pool.ntp.org iburst,
+      -  1.ubuntu.pool.ntp.org iburst,
+      -  2.ubuntu.pool.ntp.org iburst,
+      -  3.ubuntu.pool.ntp.org iburst,
+      -  ntp.ubuntu.com
+   #- balcony
+   #- ros_concert
+   - role: syncthing
+     tags: syncthing
+     become: yes
+     syncthing_version: 0.13.9

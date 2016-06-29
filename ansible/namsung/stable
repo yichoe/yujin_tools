@@ -1,0 +1,12 @@
+# inventory of concert servers
+[namsung-concert]
+gocart-servertest
+
+# inventory of all gopher robots
+[namsung-gocart]
+gocart201
+
+# Everything in namsung
+[namsung:children]
+namsung-concert
+namsung-gocart
