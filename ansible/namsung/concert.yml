@@ -2,6 +2,9 @@
    - gocart-server
    - gocart-servertest
   strategy: debug
+  tasks:
+    - name: 'Ensure that we can connect to this host'
+      ping:
   roles:
    - role: geerlingguy.ntp
      tags: ntp
@@ -21,3 +24,18 @@
      tags: syncthing
      become: yes
      syncthing_version: 0.13.9
+   - role: docker-role
+     tags: docker
+     become: yes
+  tasks:
+    - name: 'Ensure that the docker daemon is functional'
+      become: yes
+      docker_ping:
+      retries: 5
+      delay: 10
+      until: result|success
+    - name: 'docker selftest : hello world'
+      docker:
+        name: 'helloworld'
+        image: 'hello-world'
+        state: 'started'
