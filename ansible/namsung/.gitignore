@@ -3,3 +3,4 @@ roles/docker-role
 roles/syncthing-role
 roles/geerlingguy.ntp
 roles/tersmitten.supervisor
+roles/docker-role
