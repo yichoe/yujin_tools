@@ -1,14 +1,14 @@
- - geerlingguy.ntp
- - tersmitten.supervisor
+ - src: geerlingguy.ntp
+
+ - src: tersmitten.supervisor
+
  - src: https://github.com/asmodehn/ansible-syncthing-debian.git
    version: master
    name: syncthing-role
-   path: roles/
 
  - src: https://github.com/asmodehn/ansible-role-docker.git
    version: master
    name: docker-role
-   path: roles/
 
  - src: https://github.com/asmodehn/ansible-role-ros.git
    version: master

@@ -31,14 +31,42 @@
      tags: docker
      become: yes
   tasks:
-    - name: 'Ensure that the docker daemon is functional'
-      become: yes
-      docker_ping:
-      retries: 5
-      delay: 10
-      until: result|success
-    - name: 'docker selftest : hello world'
-      docker:
-        name: 'helloworld'
-        image: 'hello-world'
-        state: 'started'
+   - name: 'Ensure that the docker daemon is functional'
+     become: yes
+     docker_ping:
+     retries: 5
+     delay: 10
+     until: result|success
+     tags: docker
+   - name: 'docker selftest : hello world'
+     docker:
+       name: 'helloworld'
+       image: 'hello-world'
+       state: 'started'
+     tags: docker
+  vars_prompt:
+   - name: "docker_hub_login"
+     prompt: "Docker Hub Username : "
+     private: no
+     tags: docker
+   - name: "docker_hub_password"
+     prompt: "Docker Hub password : "
+     private: yes
+     tags: docker
+   - name: "docker_hub_email"
+     prompt: "Docker Hub email : "
+     private: no
+     tags: docker
+  tasks:
+   - name: Log into Docker Hub
+     docker_login:
+       username: "{{docker_hub_login}}"
+       password: "{{docker_hub_password}}"
+       email: "{{docker_hub_email}}"
+     tags: docker
+
+   - name: Pulls balcony
+     docker_image:
+       name: yujinrobot/balcony
+       tag: latest
+     tags: docker
