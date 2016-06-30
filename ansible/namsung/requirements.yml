@@ -2,13 +2,13 @@
 
  - src: tersmitten.supervisor
 
+ - src: marvinpinto.docker
+
+
  - src: https://github.com/asmodehn/ansible-syncthing-debian.git
    version: master
    name: syncthing-role
 
- - src: https://github.com/asmodehn/ansible-role-docker.git
-   version: master
-   name: docker-role
 
  - src: https://github.com/asmodehn/ansible-role-ros.git
    version: master

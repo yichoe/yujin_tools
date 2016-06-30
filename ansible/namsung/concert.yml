@@ -2,48 +2,9 @@
    - gocart-server
    - gocart-servertest
   #strategy: debug
-  tasks:
+  pre_tasks:
     - name: 'Ensure that we can connect to this host'
       ping:
-  roles:
-   - role: geerlingguy.ntp
-     tags: ntp
-     become: yes
-     ntp_enabled: true
-     ntp_timezone: Etc/UTC
-     ntp_manage_config: true
-     ntp_servers: 
-      -  0.ubuntu.pool.ntp.org iburst,
-      -  1.ubuntu.pool.ntp.org iburst,
-      -  2.ubuntu.pool.ntp.org iburst,
-      -  3.ubuntu.pool.ntp.org iburst,
-      -  ntp.ubuntu.com
-   #- balcony
-   #- ros_concert
-   - role: tersmitten.supervisor
-     tags: supervisor
-     become: yes
-   - role: syncthing
-     tags: syncthing
-     become: yes
-     syncthing_version: 0.13.9
-   - role: docker-role
-     tags: docker
-     become: yes
-  tasks:
-   - name: 'Ensure that the docker daemon is functional'
-     become: yes
-     docker_ping:
-     retries: 5
-     delay: 10
-     until: result|success
-     tags: docker
-   - name: 'docker selftest : hello world'
-     docker:
-       name: 'helloworld'
-       image: 'hello-world'
-       state: 'started'
-     tags: docker
   vars_prompt:
    - name: "docker_hub_login"
      prompt: "Docker Hub Username : "
@@ -57,16 +18,37 @@
      prompt: "Docker Hub email : "
      private: no
      tags: docker
-  tasks:
-   - name: Log into Docker Hub
-     docker_login:
-       username: "{{docker_hub_login}}"
-       password: "{{docker_hub_password}}"
-       email: "{{docker_hub_email}}"
-     tags: docker
+  roles:
+   - role: geerlingguy.ntp
+     tags: ntp
+     become: yes
+     ntp_enabled: true
+     ntp_timezone: Etc/UTC
+     ntp_manage_config: true
+     ntp_servers: 
+      -  0.ubuntu.pool.ntp.org iburst,
+      -  1.ubuntu.pool.ntp.org iburst,
+      -  2.ubuntu.pool.ntp.org iburst,
+      -  3.ubuntu.pool.ntp.org iburst,
+      -  ntp.ubuntu.com
 
-   - name: Pulls balcony
-     docker_image:
-       name: yujinrobot/balcony
-       tag: latest
-     tags: docker
+   - role: balcony-docker
+     tags: balcony-docker
+     balcony_dockerhub_user: "{{ docker_hub_login }}"
+     balcony_dockerhub_password: "{{ docker_hub_password }}"
+     balcony_dockerhub_email: "{{ docker_hub_email }}"
+     become: yes
+
+   #- ros_concert
+
+   - role: syncthing
+     tags: syncthing
+     become: yes
+     syncthing_version: 0.13.9
+
+# tasks:
+#  - name : Ensure balcony is started
+#    supervisorctl:
+#      name: balcony-docker
+#      state: present
+#    tags: [balcony-docker]

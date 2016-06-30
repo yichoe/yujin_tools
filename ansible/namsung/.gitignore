@@ -1,6 +1,8 @@
-roles/ros-role
-roles/docker-role
-roles/syncthing-role
 roles/geerlingguy.ntp
 roles/tersmitten.supervisor
-roles/docker-role
+roles/marvinpinto.docker
+roles/syncthing-role
+roles/ros-role
+
+# Editor
+.idea

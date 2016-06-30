@@ -1,0 +1,22 @@
+galaxy_info:
+  author: AlexV
+  description: role to ensure balcony docker container is running
+  company: YujinRobot
+  license: BSD
+  min_ansible_version: 1.2
+  platforms:
+   - name: Ubuntu
+     versions:
+      - trusty
+
+dependencies:
+ - role: marvinpinto.docker
+ - role: tersmitten.supervisor
+   tags: [supervisor, balcony]
+   supervisor_programs_present:
+     balcony-docker:
+       user: yujin
+       command: bash -c "docker rm supervisord_balcony; docker run -i --net=\"host\" --name supervisord_balcony --rm yujinrobot/balcony"
+       autostart: true
+       stdout_logfile: /var/log/supervisor/balcony.out.log
+       stderr_logfile: /var/log/supervisor/balcony.err.log
