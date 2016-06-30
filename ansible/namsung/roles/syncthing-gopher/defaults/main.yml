@@ -1,0 +1,16 @@
+---
+# defaults file for syncthing-gopher
+syncthing_system_user: yujin
+syncthing_system_group: yujin
+syncthing_system_user_home: "/home/{{ syncthing_system_user }}"
+syncthing_system_syncthing_home: "/home/{{ syncthing_system_user }}/.config/syncthing"
+
+syncthing_folders:
+  default:
+    label: Default
+    path: "/home/{{ syncthing_system_user }}/Sync"
+
+syncthing_gui_enable: false
+syncthing_gui_enable_tls: true
+syncthing_gui_host: 127.0.0.1
+syncthing_gui_port: 8384

@@ -1,8 +1,9 @@
+# ansible requirements
 roles/geerlingguy.ntp
 roles/tersmitten.supervisor
 roles/marvinpinto.docker
-roles/syncthing-role
-roles/ros-role
+roles/asmodehn.syncthing
+roles/asmodehn.ros
 
 # Editor
 .idea

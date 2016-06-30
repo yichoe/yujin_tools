@@ -7,10 +7,9 @@
 
  - src: https://github.com/asmodehn/ansible-syncthing-debian.git
    version: master
-   name: syncthing-role
+   name: asmodehn.syncthing
 
 
  - src: https://github.com/asmodehn/ansible-role-ros.git
    version: master
-   name: ros-role
-   path: roles/
+   name: asmodehn.ros

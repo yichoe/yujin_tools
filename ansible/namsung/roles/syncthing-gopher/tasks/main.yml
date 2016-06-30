@@ -1,0 +1,14 @@
+# tasks file for supervisor
+---
+- include: configure.yml
+  tags:
+    - syncthing-gopher
+    - syncthing-gopher-configure
+
+- name: start and enable service
+  supervisorctl:
+    name: syncthing-gopher
+    state: present
+  tags:
+    - syncthing-gopher
+    - syncthing-gopher-started

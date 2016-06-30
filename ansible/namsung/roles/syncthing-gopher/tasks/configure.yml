@@ -1,0 +1,21 @@
+# tasks file for syncthing-gopher
+---
+- name: configure | stat directories
+  stat:
+    path: "{{ syncthing_system_user_home }}/.config/syncthing"
+  register: stat_directories
+  tags:
+    - syncthing-configure-directories
+
+- name: configure | update configuration file - "{{ syncthing_system_user_home }}/.config/syncthing/config.xml"
+  template:
+    src: .config/syncthing/config.xml.j2
+    dest: "{{ syncthing_system_user_home }}/.config/syncthing/config.xml"
+    owner: "{{ syncthing_system_user }}"
+    group: "{{ syncthing_system_group }}"
+    mode: 0640
+  with_dict: "{{ syncthing_folders }}"  # TODO : present + absent folders when possible (following supervisor role vars design)
+  notify: restart syncthing-gopher
+  tags:
+    - syncthing-configure-configuration
+

@@ -5,18 +5,15 @@
    retries: 5
    delay: 10
    until: result|success
-   tags: [balcony-docker]
 
  - name: Check we are logged into Docker Hub
    docker_login:
      username: "{{ balcony_dockerhub_user }}"
      password: "{{ balcony_dockerhub_password }}"
      email: "{{ balcony_dockerhub_email }}"
-   tags: [balcony-docker]
 
  - name: Ensure balcony is latest
    docker_image:
      name: yujinrobot/balcony
      tag: latest
-   tags: [balcony-docker]
 
