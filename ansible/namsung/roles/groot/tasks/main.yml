@@ -1,2 +1,17 @@
 ---
-# tasks file for groot
+# tasks file for groot_binaries
+# Super basic tasks for now, this can be greatly improved by using ansible role to do the job of groot_binaries script
+
+# Requirements too high for trusty (pexpect > 3.3)
+#- name: "Calling groot_binaries"
+#  expect:
+#    command: "groot_binaries --{{ groot_distro }} {{ '--external' if groot_use_external else '' }}"
+#    responses:
+#      (?i)password: "{{ groot_password }}"
+
+- name: "Calling groot_binaries"
+  command: "groot_binaries --{{ groot_distro }} {{ '--external' if groot_use_external else '' }}"
+
+- name: "Installing groot_binaries"
+  command: "groot_binaries --{{ groot_distro }} --install-rosdeps"
+  when: groot_install_rosdeps

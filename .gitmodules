@@ -1,0 +1,6 @@
+[submodule "ansible/namsung/roles/asmodehn.syncthing"]
+	path = ansible/namsung/roles/asmodehn.syncthing
+	url = https://github.com/asmodehn/ansible-syncthing-debian.git
+[submodule "ansible/namsung/roles/asmodehn.ros"]
+	path = ansible/namsung/roles/asmodehn.ros
+	url = https://github.com/asmodehn/ansible-role-ros.git

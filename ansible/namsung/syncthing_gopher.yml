@@ -61,6 +61,7 @@
      syncthing_gui_password_bcrypt: "{{ vault_syncthing_gopher_gui_password_bcrypt }}"
      syncthing_gui_apikey: "{{ vault_syncthing_gopher_gui_apikey }}"
 
+
    - role: tersmitten.supervisor
      tags: syncthing-supervisor
      become: yes

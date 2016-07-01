@@ -4,6 +4,7 @@
 - hosts:
    - gocart-server
    - gocart-servertest
+   - zach
 
   #strategy: debug
   pre_tasks:
@@ -11,12 +12,16 @@
      ping:
 
   roles:
+   - role: groot
+     become: yes
+     groot_distro: devel
+     groot_password: "{{ vault_groot_password }}"
 
-  post_tasks:
-    - name: start syncthing service via supervisor
-      become: yes
-      supervisorctl:
-        name: syncthing
-        state: restarted
-      tags:
-        - syncthing-start
+#  post_tasks:
+#   - name: start syncthing service via supervisor
+#     become: yes
+#     supervisorctl:
+#       name: syncthing
+#       state: restarted
+#     tags:
+#       - syncthing-start

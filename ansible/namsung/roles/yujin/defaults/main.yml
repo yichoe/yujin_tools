@@ -1,2 +1,6 @@
 ---
-# defaults file for yujin
+yujin_packages: ["build-essential-yujin", "python-yujin-tools"]
+
+# Optionally use a mirror for the ROS packages
+yujin_apt_uri: "http://packages.yujinrobot.com/yujin/ubuntu"
+yujin_apt_key: "http://packages.yujinrobot.com/yujin.key"

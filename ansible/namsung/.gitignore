@@ -2,8 +2,6 @@
 roles/geerlingguy.ntp
 roles/tersmitten.supervisor
 roles/marvinpinto.docker
-roles/asmodehn.syncthing
-roles/asmodehn.ros
 
 # Editor
 .idea

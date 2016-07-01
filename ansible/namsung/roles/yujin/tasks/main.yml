@@ -1,2 +1,15 @@
 ---
-# tasks file for yujin
+- name: Ansure the Yujin repository apt-key is installed
+  apt_key:
+    url: "{{ yujin_apt_key }}"
+    state: present
+
+- name: Ensure Yujin repository is in the sources list
+  apt_repository:
+    repo: "deb {{ yujin_apt_uri }} {{ ansible_lsb.codename }} main"
+    state: present
+
+- name: Ensure Yujin packages are installed
+  apt:
+    pkg: "{{ yujin_packages }}"
+    state: present

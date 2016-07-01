@@ -4,12 +4,15 @@
 
  - src: marvinpinto.docker
 
+# Somehow we dont get git clones with this
+# => using submodules for now
 
- - src: https://github.com/asmodehn/ansible-syncthing-debian.git
-   version: master
-   name: asmodehn.syncthing
+ #- src: https://github.com/asmodehn/ansible-syncthing-debian.git
+ #  version: master
+ #  name: asmodehn.syncthing
+ #  scm: git
 
-
- - src: https://github.com/asmodehn/ansible-role-ros.git
-   version: master
-   name: asmodehn.ros
+# - src: https://github.com/asmodehn/ansible-role-ros.git
+#   version: master
+#   name: asmodehn.ros
+#   scm: git
