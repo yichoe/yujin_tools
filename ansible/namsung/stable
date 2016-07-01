@@ -4,7 +4,7 @@ gocart-servertest
 
 # inventory of all gopher robots
 [namsung-gocart]
-gocart201
+gocart204
 
 # Everything in namsung
 [namsung:children]

@@ -1,0 +1,22 @@
+#
+# Playbook to install ROS concert software.
+#
+- hosts:
+   - gocart-server
+   - gocart-servertest
+
+  #strategy: debug
+  pre_tasks:
+   - name: 'Ensure that we can connect to this host'
+     ping:
+
+  roles:
+
+  post_tasks:
+    - name: start syncthing service via supervisor
+      become: yes
+      supervisorctl:
+        name: syncthing
+        state: restarted
+      tags:
+        - syncthing-start

@@ -1,72 +1,12 @@
 - hosts: 
    - gocart-server
    - gocart-servertest
-  #strategy: debug
-  pre_tasks:
-   - name: 'Ensure that we can connect to this host'
-     ping:
+   - zach
 
-  vars_prompt:
-   - name: "docker_hub_login"
-     prompt: "Docker Hub Username"
-     private: no
-     tags: balcony-docker
-   - name: "docker_hub_password"
-     prompt: "Docker Hub password"
-     private: yes
-     tags: balcony-docker
-   - name: "docker_hub_email"
-     prompt: "Docker Hub email"
-     private: no
-     tags: balcony-docker
+- include: basic.yml
+- include: syncthing_gopher.yml
+  syncthing_share_group: namsung
 
-  roles:
-   - role: geerlingguy.ntp
-     tags: ntp
-     become: yes
-     ntp_enabled: true
-     ntp_timezone: Etc/UTC
-     ntp_manage_config: true
-     ntp_servers: 
-      -  0.ubuntu.pool.ntp.org iburst,
-      -  1.ubuntu.pool.ntp.org iburst,
-      -  2.ubuntu.pool.ntp.org iburst,
-      -  3.ubuntu.pool.ntp.org iburst,
-      -  ntp.ubuntu.com
-
-   - role: balcony-docker
-     tags: balcony-docker
-     balcony_dockerhub_user: "{{ docker_hub_login }}"
-     balcony_dockerhub_password: "{{ docker_hub_password }}"
-     balcony_dockerhub_email: "{{ docker_hub_email }}"
-     become: yes
-
-   #- ros_concert
-
-   - role: syncthing-gopher
-     tags: syncthing-gopher
-     become: yes
-     syncthing_system_user: yujin
-     syncthing_system_group: yujin
-
-     syncthing_folders:
-       default:
-         label: Default
-         path: "/home/{{ syncthing_system_user }}/Sync"
-
-     syncthing_gui_enable: true
-     syncthing_gui_enable_tls: false
-     syncthing_gui_host: 0.0.0.0
-     syncthing_gui_port: 8384
-
-     syncthing_gui_user: "{{ vault_syncthing_gopher_gui_user }}"
-     syncthing_gui_password_bcrypt: "{{ vault_syncthing_gopher_gui_password_bcrypt }}"
-     syncthing_gui_apikey: "{{ vault_syncthing_gopher_gui_apikey }}"
+- include: docker_balcony.yml
 
 
-# tasks:
-#  - name : Ensure balcony is started
-#    supervisorctl:
-#      name: balcony-docker
-#      state: present
-#    tags: [balcony-docker]

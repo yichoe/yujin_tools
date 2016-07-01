@@ -1,5 +1,14 @@
-- hosts: gocarts
+- hosts:
+   - gocart201
+   - gocart202
+   - gocart203
+   - gocart204
+
+- include: basic.yml
+- include: syncthing_gopher.yml
+  syncthing_share_group: namsung-concert
+
   roles:
-   - common
-   - ros_install
-   - ros_gopher
+  # TODO : chrony
+   #- ros_concert
+

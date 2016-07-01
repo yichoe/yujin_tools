@@ -11,11 +11,3 @@ galaxy_info:
 
 dependencies:
  - role: marvinpinto.docker
- - role: tersmitten.supervisor
-   supervisor_programs_present:
-     balcony-docker:
-       user: yujin
-       command: docker run -i --net=\"host\" yujinrobot/balcony
-       autostart: true
-       stdout_logfile: /var/log/supervisor/balcony.out.log
-       stderr_logfile: /var/log/supervisor/balcony.err.log

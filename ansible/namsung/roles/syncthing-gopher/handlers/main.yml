@@ -1,8 +1,0 @@
----
-# handlers file for syncthing-gopher
-- name: restart syncthing-gopher
-  supervisorctl:
-    name: syncthing
-    state: restarted
-  when: supervisor_state == 'started'
-

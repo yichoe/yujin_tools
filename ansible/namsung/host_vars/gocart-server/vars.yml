@@ -1,0 +1,5 @@
+ansible_user: yujin
+syncthing_gopher_id: 2ACRIOH-ZYAM3L5-5JRGC7Z-3JR7FFJ-RNW35WG-4BXUPXG-DTIN64I-GAIEIAF
+syncthing_gopher_user: yujin
+syncthing_gopher_user_home: "/home/{{ syncthing_gopher_user }}"
+syncthing_gopher_syncthing_home: "/home/{{ syncthing_gopher_user }}/.config/syncthing"

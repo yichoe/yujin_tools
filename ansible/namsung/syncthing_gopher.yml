@@ -1,0 +1,83 @@
+#
+# Playbook to install syncthing, preconfigured for gopher usage.
+#
+- hosts:
+   - gocart-server
+   - gocart-servertest
+   - zach
+   - gocart201
+   - gocart202
+   - gocart203
+   - gocart204
+
+  #strategy: debug
+  pre_tasks:
+   - name: 'Ensure that we can connect to this host'
+     ping:
+   - name: 'Ensure vault has been opened since we ll need variables from it'
+     fail: msg="Bailing out this play requires '{{ item }}'"
+     when: item is not defined
+     with_items:
+      - syncthing_share_group
+      - vault_syncthing_gopher_gui_user
+      - vault_syncthing_gopher_gui_password_bcrypt
+      - vault_syncthing_gopher_gui_apikey
+   - name: 'Ensure ROS Sync directory exists'
+     file:
+       path: /home/yujin/.ros/sync/
+       state: directory
+       owner: yujin
+       group: yujin
+       mode: 0755
+       recurse: yes
+
+  roles:
+
+   - role: asmodehn.syncthing
+     tags: syncthing-setup
+     become: yes
+     syncthing_version: 0.13.9
+     syncthing_system_user: "{{ syncthing_gopher_user }}"
+     syncthing_system_group: "{{ syncthing_gopher_user }}"
+
+     syncthing_folders:
+       - id: "{{ inventory_hostname }}-ros-sync"
+         label: "{{ inventory_hostname }}-ros-sync"
+         path: "/home/{{ syncthing_gopher_user }}/.ros/sync/{{ inventory_hostname }}"
+         ignore_patterns:
+          - sync
+         shared_with_groups:
+          - "{{ syncthing_gopher_share_group }}"
+
+     syncthing_net_groups:
+      - "{{ syncthing_gopher_share_group }}"
+
+     syncthing_gui_enable: true
+     syncthing_gui_enable_tls: false
+     syncthing_gui_host: 0.0.0.0
+     syncthing_gui_port: 8384
+
+     syncthing_gui_user: "{{ vault_syncthing_gopher_gui_user }}"
+     syncthing_gui_password_bcrypt: "{{ vault_syncthing_gopher_gui_password_bcrypt }}"
+     syncthing_gui_apikey: "{{ vault_syncthing_gopher_gui_apikey }}"
+
+   - role: tersmitten.supervisor
+     tags: syncthing-supervisor
+     become: yes
+     supervisor_programs_present:
+       syncthing:
+         user: "{{ syncthing_gopher_user }}"
+         environment: STNORESTART="1", HOME="{{ syncthing_gopher_user_home }}"
+         command: /usr/bin/syncthing -no-browser -home="{{ syncthing_gopher_syncthing_home }}"
+         autostart: true
+         stdout_logfile: /var/log/supervisor/syncthing.out.log
+         stderr_logfile: /var/log/supervisor/syncthing.err.log
+
+  post_tasks:
+    - name: start syncthing service via supervisor
+      become: yes
+      supervisorctl:
+        name: syncthing
+        state: restarted
+      tags:
+        - syncthing-start

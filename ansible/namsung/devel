@@ -1,12 +1,13 @@
 # inventory of concert servers
 [namsung-concert]
-gocart-server ansible_user=yujin
+gocart-server
+zach
 
 # inventory of all gopher robots
 [namsung-gocart]
-#gocart202 ansible_user=yujin
-#gocart203 ansible_user=yujin
-gocart204 ansible_user=yujin
+# gocart201
+# gocart202
+gocart203
 
 # everything in namsung
 [namsung:children]

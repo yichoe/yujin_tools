@@ -17,3 +17,8 @@
      name: yujinrobot/balcony
      tag: latest
 
+ - name : Ensure balcony is started
+   supervisorctl:
+     name: balcony-docker
+     state: present
+   tags: [balcony-docker]
