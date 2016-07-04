@@ -20,3 +20,11 @@
       -  2.ubuntu.pool.ntp.org iburst,
       -  3.ubuntu.pool.ntp.org iburst,
       -  ntp.ubuntu.com
+
+  tasks:
+   - cron:
+       name: "Get groot_binaries"
+       user: root
+       hour: "17"  # this is 2AM Seoul Time
+       job: "groot_binaries --devel"
+     become: yes
