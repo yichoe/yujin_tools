@@ -15,3 +15,5 @@
 - name: "Installing groot_binaries"
   command: "groot_binaries --{{ groot_distro }} --install-rosdeps"
   when: groot_install_rosdeps
+
+# TODO : use http://docs.ansible.com/ansible/synchronize_module.html

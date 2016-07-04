@@ -43,7 +43,7 @@
      syncthing_folders:
        - id: "{{ inventory_hostname }}-ros-sync"
          label: "{{ inventory_hostname }}-ros-sync"
-         path: "/home/{{ syncthing_gopher_user }}/.ros/sync/{{ inventory_hostname }}"
+         path: "/home/{{ syncthing_gopher_user }}/.ros/gopher/sync/{{ inventory_hostname }}"
          ignore_patterns:
           - sync
          shared_with_groups:
@@ -74,11 +74,11 @@
          stdout_logfile: /var/log/supervisor/syncthing.out.log
          stderr_logfile: /var/log/supervisor/syncthing.err.log
 
-  post_tasks:
-    - name: start syncthing service via supervisor
-      become: yes
-      supervisorctl:
-        name: syncthing
-        state: restarted
-      tags:
-        - syncthing-start
+#  post_tasks:
+#    - name: start syncthing service via supervisor
+#      become: yes
+#      supervisorctl:
+#        name: syncthing
+#        state: restarted
+#      tags:
+#        - syncthing-start
