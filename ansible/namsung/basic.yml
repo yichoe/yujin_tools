@@ -22,9 +22,12 @@
       -  ntp.ubuntu.com
 
   tasks:
+  # TODO : this relies on yujin package -> also need to set that up
+  # This task probably requires better user / ssh keys management.
    - cron:
        name: "Get groot_binaries"
        user: root
        hour: "17"  # this is 2AM Seoul Time
-       job: "groot_binaries --devel"
+       # echo until we solve the automated authentication problem.
+       job: "/usr/local/bin/groot_binaries --devel --external"
      become: yes

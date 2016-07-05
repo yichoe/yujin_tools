@@ -41,8 +41,8 @@
      syncthing_system_group: "{{ syncthing_gopher_user }}"
 
      syncthing_folders:
-       - id: "{{ inventory_hostname }}-ros-sync"
-         label: "{{ inventory_hostname }}-ros-sync"
+       - id: "{{ inventory_hostname }}-gopher-sync"
+         label: "{{ inventory_hostname }}-gopher-sync"
          path: "/home/{{ syncthing_gopher_user }}/.ros/gopher/sync/{{ inventory_hostname }}"
          ignore_patterns:
           - sync

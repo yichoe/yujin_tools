@@ -4,3 +4,6 @@
 [submodule "ansible/namsung/roles/asmodehn.ros"]
 	path = ansible/namsung/roles/asmodehn.ros
 	url = https://github.com/asmodehn/ansible-role-ros.git
+[submodule "ansible/namsung/roles/asmodehn.supervisor"]
+	path = ansible/namsung/roles/asmodehn.supervisor
+	url = https://github.com/asmodehn/ansible-supervisor.git

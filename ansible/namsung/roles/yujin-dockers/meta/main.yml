@@ -1,6 +1,6 @@
 galaxy_info:
   author: AlexV
-  description: role to ensure balcony docker container is running
+  description: role to ensure balcony docker container is available
   company: YujinRobot
   license: BSD
   min_ansible_version: 1.2

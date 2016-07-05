@@ -1,5 +1,5 @@
 ---
-- name: Ansure the Yujin repository apt-key is installed
+- name: Ensure the Yujin repository apt-key is installed
   apt_key:
     url: "{{ yujin_apt_key }}"
     state: present

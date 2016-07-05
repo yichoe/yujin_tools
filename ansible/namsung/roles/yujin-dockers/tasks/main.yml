@@ -1,0 +1,21 @@
+---
+ - name: 'Ensure that the docker daemon is functional'
+   docker_ping:
+   retries: 5
+   delay: 10
+   until: result|success
+
+ - debug: var=yujin_docker_image_name
+ - debug: var=yujin_docker_image_tag
+
+ - name: Check we are logged into Docker Hub
+   docker_login:
+     username: "{{ yujin_dockerhub_user }}"
+     password: "{{ yujin_dockerhub_password }}"
+     email: "{{ yujin_dockerhub_email }}"
+
+ - name: Ensure balcony is latest
+   docker_image:
+     name: "{{ item.name }}"
+     tag: "{{ item.tag }}"
+   with_items: yujin_docker_images

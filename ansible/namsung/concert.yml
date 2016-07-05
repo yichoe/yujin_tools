@@ -5,8 +5,7 @@
 
 - include: basic.yml
 - include: syncthing_gopher.yml
-  syncthing_share_group: namsung
-
-- include: docker_balcony.yml
+- include: yujin.yml
+#- include: docker_balcony.yml
 
 
