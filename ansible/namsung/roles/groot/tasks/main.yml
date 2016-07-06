@@ -1,0 +1,46 @@
+---
+# Requirements too high for trusty (pexpect > 3.3)
+#- name: "Calling groot_binaries"
+#  expect:
+#    command: "groot_binaries --{{ groot_distro }} {{ '--external' if groot_use_external else '' }}"
+#    responses:
+#      (?i)password: "{{ groot_password }}"
+
+# direct groot binary call
+- name: "Calling groot_binaries"
+  command: "groot_binaries --{{ groot_stream|default(stable) }} {{ '--external' if groot_use_external|default(True) else '' }}"
+  become: yes # we want to always use root here
+
+#- name: "Installing groot_binaries dependencies"
+#  command: "groot_binaries --{{ groot_stream|default(stable) }} --install-rosdeps"
+#  when: "{{ groot_install_rosdeps|default(True) }}"
+#
+
+# Currently broken (Ansible 2.1.0.0)
+#- name: synchronize binaries from internal files.yujin.com server
+#  become: yes
+#  synchronize:
+#    links: yes
+#    recursive: yes
+#    delete: yes
+#    src: "files@files.yujin.com:shared/installspaces/yujin/amd64/indigo-{{ groot_stream }}"
+#    dest: /opt/yujin/amd64
+#    mode: pull
+#  delegate_to: "{{ inventory_hostname }}"
+#  when: not groot_use_external
+#
+#- name: synchronize binaries from external files.yujinrobot.com server
+#  become: yes
+#  synchronize:
+#    links: yes
+#    recursive: yes
+#    delete: yes
+#    src: /opt/yujin/amd64
+#    dest: "/data/file_server/rsync_repositories/yujin/amd64/indigo-{{ groot_stream }}"
+#    mode: pull  # has to be push because of user permissions (ansible versus rsync/ssh settings)
+#  delegate_to: "{{ inventory_hostname }}"
+#  when: groot_use_external
+
+- name: rosdep install
+  command: "rosdep install -r --default-yes --from-paths /opt/yujin/amd64/indigo-{{ groot_stream }} --ignore-src"
+  changed_when: false  # we can probably ignore this, since changes would come from a change in previous task

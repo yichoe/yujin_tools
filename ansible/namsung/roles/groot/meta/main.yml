@@ -1,0 +1,14 @@
+galaxy_info:
+  author: AlexV
+  description: Role to install groot binaries
+  company: YujinRobot
+  license: BSD
+  min_ansible_version: 1.2
+
+  platforms:
+  - name: Ubuntu
+    versions:
+    - trusty
+
+dependencies:
+  - role: yujin

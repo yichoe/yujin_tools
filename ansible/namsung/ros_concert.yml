@@ -9,30 +9,11 @@
     - name: 'Ensure that we can connect to this host'
       ping:
 
-    # Super basic pre_tasks for now, this can be greatly improved by using ansible role to do the job of groot_binaries script
-
-    # Requirements too high for trusty (pexpect > 3.3)
-    #- name: "Calling groot_binaries"
-    #  expect:
-    #    command: "groot_binaries --{{ groot_distro }} {{ '--external' if groot_use_external else '' }}"
-    #    responses:
-    #      (?i)password: "{{ groot_password }}"
-
-    - name: "Calling groot_binaries"
-      command: "groot_binaries --{{ groot_stream|default(stable) }} {{ '--external' if groot_use_external|default(True) else '' }}"
-      become: yes # we want to always use root here
-
-    - name: "Installing groot_binaries dependencies"
-      command: "groot_binaries --{{ groot_stream|default(stable) }} --install-rosdeps"
-      when: "{{ groot_install_rosdeps|default(True) }}"
-
-  # TODO : use http://docs.ansible.com/ansible/synchronize_module.html
-  # TODO : ansible role to replace groot_binaries
-
   roles:
-   - role: yujin
+   - role: groot
    - role: asmodehn.supervisor
      tags: concert-supervisor
+     become: yes
      supervisor_programs_present:
        ros-concert:
          user: "{{ ros_concert_user }}"
@@ -45,15 +26,12 @@
          stderr_logfile: /var/log/supervisor/ros-concert.err.log
      when: "'concert' in group_names"
 
-    #TODO: review order here : yujin should be before groot, and supervisor should be after groot
-    # => when we replace groot_binaries with synchronize based role
-
   post_tasks:
     - name: Check if roslaunch is running more than once # we should have only one roslaunch on the concert -> no sim until we get a reliable stop/start process
       shell: sleep 5 && ps aux | grep roslaunch | grep -v grep | wc -l
       ignore_errors: yes
       changed_when: false
-      failed_when: "roslaunch_running != 1"
+      failed_when: "roslaunch_running.stdout != '1'"
       register: roslaunch_running
 
 

@@ -84,26 +84,26 @@ Running Playbooks
 
 * Run `clocksync.yml` to ensure clock synchronization software is setup and running on both robots and concert
 
-    `ansible-playbook clocksync.yml --ask-vault-pass -K -b`
+    `ansible-playbook clocksync.yml --ask-vault-pass -K`
      or only on concert:
-    `ansible-playbook clocksync.yml --ask-vault-pass -K -b --limit concert`
+    `ansible-playbook clocksync.yml --ask-vault-pass -K --limit concert`
 
 * Run `concert_dockers.yml` to ensure the concert dockers are setup and running on concert (local) server
     
-    `ansible-playbook concert_dockers.yml --ask-vault-pass -K -b`
+    `ansible-playbook concert_dockers.yml --ask-vault-pass -K`
 
 * Run `ros_concert.yml` to ensure the ros_concert software is setup and running on concert (local) server
 
-    `ansible-playbook ros_concert.yml --ask-vault-pass -K -b`
+    `ansible-playbook ros_concert.yml --ask-vault-pass -K`
      to make sure we re installing groot --devel ( this will override local config )
-     `ansible-playbook ros_concert.yml --ask-vault-pass -K -b -e groot_stream="devel"`
+     `ansible-playbook ros_concert.yml --ask-vault-pass -K -e groot_stream="devel"`
 
     
 * Run `syncthing_gopher.yml` to ensure syncthing is setup and running on both robots and concert
 
-    `ansible-playbook syncthing_gopher.yml --ask-vault-pass -K -b`
+    `ansible-playbook syncthing_gopher.yml --ask-vault-pass -K`
      or only on a specific robot:
-    `ansible-playbook syncthing_gopher.yml --ask-vault-pass -K -b --limit gocart203`
+    `ansible-playbook syncthing_gopher.yml --ask-vault-pass -K --limit gocart203`
     
 * Run `concert.yml` to ensure concert server is setup and running (master playbook). 
 * TODO : `ros_gopher.yml` to ensure ros_gopher software is setup and running on robots

@@ -12,6 +12,7 @@ galaxy_info:
 
 dependencies:
   - role: asmodehn.ros
+    become: yes
     ros_release: "indigo"
     ros_package: "ros-base"
     ros_apt_uri: "http://packages.ros.org/ros/ubuntu"

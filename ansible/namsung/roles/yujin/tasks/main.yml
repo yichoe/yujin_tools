@@ -1,15 +1,18 @@
 ---
 - name: Ensure the Yujin repository apt-key is installed
+  become: yes
   apt_key:
     url: "{{ yujin_apt_key }}"
     state: present
 
 - name: Ensure Yujin repository is in the sources list
+  become: yes
   apt_repository:
     repo: "deb {{ yujin_apt_uri }} {{ ansible_lsb.codename }} main"
     state: present
 
 - name: Ensure Yujin packages are installed
+  become: yes
   apt:
     pkg: "{{ yujin_packages }}"
     state: present
