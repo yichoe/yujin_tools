@@ -19,12 +19,12 @@
     #      (?i)password: "{{ groot_password }}"
 
     - name: "Calling groot_binaries"
-      command: "groot_binaries --{{ groot_stream|default(stable) }} {{ '--external' if groot_use_external|default(yes) else '' }}"
+      command: "groot_binaries --{{ groot_stream|default(stable) }} {{ '--external' if groot_use_external|default(True) else '' }}"
       become: yes # we want to always use root here
 
     - name: "Installing groot_binaries dependencies"
       command: "groot_binaries --{{ groot_stream|default(stable) }} --install-rosdeps"
-      when: ""{{ groot_install_rosdeps|default(yes) }}
+      when: "{{ groot_install_rosdeps|default(True) }}"
 
   # TODO : use http://docs.ansible.com/ansible/synchronize_module.html
   # TODO : ansible role to replace groot_binaries
