@@ -2,7 +2,7 @@
 # Playbook to install Gopher ROS software.
 #
 - hosts:
-   - concert
+   - concert  # note : this can also be a group
 
   #strategy: debug
   pre_tasks:
@@ -48,5 +48,12 @@
     #TODO: review order here : yujin should be before groot, and supervisor should be after groot
     # => when we replace groot_binaries with synchronize based role
 
+  post_tasks:
+    - name: Check if roslaunch is running more than once # we should have only one roslaunch on the concert -> no sim until we get a reliable stop/start process
+      shell: sleep 5 && ps aux | grep roslaunch | grep -v grep | wc -l
+      ignore_errors: yes
+      changed_when: false
+      failed_when: "roslaunch_running != 1"
+      register: roslaunch_running
 
 

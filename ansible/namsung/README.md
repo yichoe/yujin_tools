@@ -95,6 +95,9 @@ Running Playbooks
 * Run `ros_concert.yml` to ensure the ros_concert software is setup and running on concert (local) server
 
     `ansible-playbook ros_concert.yml --ask-vault-pass -K -b`
+     to make sure we re installing groot --devel ( this will override local config )
+     `ansible-playbook ros_concert.yml --ask-vault-pass -K -b -e groot_stream="devel"`
+
     
 * Run `syncthing_gopher.yml` to ensure syncthing is setup and running on both robots and concert
 
