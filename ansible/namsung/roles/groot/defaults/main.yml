@@ -1,5 +1,0 @@
----
-groot_distro: stable
-groot_use_external: yes
-groot_install_rosdeps: yes
-

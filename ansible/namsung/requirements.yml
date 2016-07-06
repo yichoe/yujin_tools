@@ -1,6 +1,6 @@
  - src: geerlingguy.ntp
 
- - src: tersmitten.supervisor
+ # - src: tersmitten.supervisor
 
  - src: marvinpinto.docker
 

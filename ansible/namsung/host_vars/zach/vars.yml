@@ -1,4 +1,0 @@
-ansible_user: yujin
-syncthing_gopher_user: yujin
-syncthing_gopher_user_home: "/home/{{ syncthing_gopher_user }}"
-syncthing_gopher_syncthing_home: "/home/{{ syncthing_gopher_user }}/.config/syncthing"

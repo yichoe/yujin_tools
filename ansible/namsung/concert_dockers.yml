@@ -2,9 +2,8 @@
 # Playbook to install baclony docker, preconfigured for gopher usage.
 #
 - hosts:
-   - gocart-server
-   - gocart-servertest
-   - zach
+    - concert
+
   #strategy: debug
   pre_tasks:
    - name: 'Ensure that we can connect to this host'

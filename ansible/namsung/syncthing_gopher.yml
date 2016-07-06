@@ -2,13 +2,16 @@
 # Playbook to install syncthing, preconfigured for gopher usage.
 #
 - hosts:
-   - gocart-server
-   - gocart-servertest
-   - zach
+   - concert
    - gocart201
    - gocart202
    - gocart203
    - gocart204
+
+  vars:
+    syncthing_gopher_user: yujin
+    syncthing_gopher_user_home: "/home/{{ syncthing_gopher_user }}"
+    syncthing_gopher_syncthing_home: "/home/{{ syncthing_gopher_user }}/.config/syncthing"
 
   #strategy: debug
   pre_tasks:
@@ -22,9 +25,9 @@
       - vault_syncthing_gopher_gui_user
       - vault_syncthing_gopher_gui_password_bcrypt
       - vault_syncthing_gopher_gui_apikey
-   - name: 'Ensure ROS Sync directory exists'
+   - name: 'Ensure ROS datalog directory exists'
      file:
-       path: /home/yujin/.ros/sync/
+       path: /home/yujin/.ros/gopher/sync/
        state: directory
        owner: yujin
        group: yujin
@@ -35,7 +38,6 @@
 
    - role: asmodehn.syncthing
      tags: syncthing-setup
-     become: yes
      syncthing_version: 0.13.9
      syncthing_system_user: "{{ syncthing_gopher_user }}"
      syncthing_system_group: "{{ syncthing_gopher_user }}"
@@ -43,7 +45,7 @@
      syncthing_folders:
        - id: "{{ inventory_hostname }}-gopher-sync"
          label: "{{ inventory_hostname }}-gopher-sync"
-         path: "/home/{{ syncthing_gopher_user }}/.ros/gopher/sync/{{ inventory_hostname }}"
+         path: "/home/{{ syncthing_gopher_user }}/.ros/gopher/sync/"
          ignore_patterns:
           - sync
          shared_with_groups:
@@ -61,8 +63,7 @@
      syncthing_gui_password_bcrypt: "{{ vault_syncthing_gopher_gui_password_bcrypt }}"
      syncthing_gui_apikey: "{{ vault_syncthing_gopher_gui_apikey }}"
 
-
-   - role: tersmitten.supervisor
+   - role: asmodehn.supervisor
      tags: syncthing-supervisor
      become: yes
      supervisor_programs_present:

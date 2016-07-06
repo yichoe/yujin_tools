@@ -1,5 +1,0 @@
-- hosts: workstation
-  roles:
-   - common
-   - ros_install
-   - ros_gopher

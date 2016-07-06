@@ -7,3 +7,6 @@
 [submodule "ansible/namsung/roles/asmodehn.supervisor"]
 	path = ansible/namsung/roles/asmodehn.supervisor
 	url = https://github.com/asmodehn/ansible-supervisor.git
+[submodule "ansible/namsung/roles/asmodehn.chrony"]
+	path = ansible/namsung/roles/asmodehn.chrony
+	url = https://github.com/asmodehn/ansible-role-chrony.git

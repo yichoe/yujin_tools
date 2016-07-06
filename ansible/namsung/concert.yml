@@ -1,11 +1,11 @@
-- hosts: 
-   - gocart-server
-   - gocart-servertest
-   - zach
+- hosts:
+   - concert
 
-- include: basic.yml
+- include: clocksync.yml
 - include: syncthing_gopher.yml
 - include: yujin.yml
 #- include: docker_balcony.yml
+
+
 
 

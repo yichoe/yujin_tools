@@ -1,27 +1,58 @@
 #
-# Playbook to install ROS concert software.
+# Playbook to install Gopher ROS software.
 #
 - hosts:
-   - gocart-server
-   - gocart-servertest
-   - zach
+   - concert
+
+  vars:
+    groot_stream: stable
+    groot_use_external: yes
+    groot_install_rosdeps: yes
+    ros_concert_user: yujin
 
   #strategy: debug
   pre_tasks:
-   - name: 'Ensure that we can connect to this host'
-     ping:
+    - name: 'Ensure that we can connect to this host'
+      ping:
+
+    # Super basic pre_tasks for now, this can be greatly improved by using ansible role to do the job of groot_binaries script
+
+    # Requirements too high for trusty (pexpect > 3.3)
+    #- name: "Calling groot_binaries"
+    #  expect:
+    #    command: "groot_binaries --{{ groot_distro }} {{ '--external' if groot_use_external else '' }}"
+    #    responses:
+    #      (?i)password: "{{ groot_password }}"
+
+    - name: "Calling groot_binaries"
+      command: "groot_binaries --{{ groot_stream }} {{ '--external' if groot_use_external else '' }}"
+      become: yes # we want to always use root here
+
+    - name: "Installing groot_binaries"
+      command: "groot_binaries --{{ groot_stream }} --install-rosdeps"
+      when: groot_install_rosdeps
+
+  # TODO : use http://docs.ansible.com/ansible/synchronize_module.html
+  # TODO : ansible role to replace groot_binaries
 
   roles:
-   - role: groot
-     become: yes
-     groot_distro: devel
-     groot_password: "{{ vault_groot_password }}"
+   - role: yujin
+   - role: asmodehn.supervisor
+     tags: concert-supervisor
+     supervisor_programs_present:
+       ros-concert:
+         user: "{{ ros_concert_user }}"
+         command: "/usr/local/bin/groot_start_concert --{{ groot_stream }}"
+         autostart: true
+         stopasgroup: true
+         stopwaitsecs: 2
+         killasgroup: true
+         stdout_logfile: /var/log/supervisor/ros-concert.out.log
+         stderr_logfile: /var/log/supervisor/ros-concert.err.log
+     when: "'concert' in group_names"
 
-#  post_tasks:
-#   - name: start syncthing service via supervisor
-#     become: yes
-#     supervisorctl:
-#       name: syncthing
-#       state: restarted
-#     tags:
-#       - syncthing-start
+    #TODO: review order here : yujin should be before groot, and supervisor should be after groot
+    # => when we replace groot_binaries with synchronize based role
+
+
+

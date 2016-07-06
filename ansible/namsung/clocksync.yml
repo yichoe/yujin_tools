@@ -1,0 +1,42 @@
+- hosts:
+   - concert
+   - gocart201
+   - gocart202
+   - gocart203
+   - gocart204
+
+  #strategy: debug
+  pre_tasks:
+   - name: 'Ensure that we can connect to this host'
+     ping:
+
+  roles:
+   - role: geerlingguy.ntp
+     tags: ntp
+     ntp_enabled: true
+     ntp_timezone: Etc/UTC
+     ntp_manage_config: true
+     ntp_servers: 
+      -  0.ubuntu.pool.ntp.org iburst,
+      -  1.ubuntu.pool.ntp.org iburst,
+      -  2.ubuntu.pool.ntp.org iburst,
+      -  3.ubuntu.pool.ntp.org iburst,
+      -  ntp.ubuntu.com
+     when: "'concert' in group_names"
+
+   - role: asmodehn.chrony
+     tags: chrony
+     chrony_server:
+       - concert minpoll 0 maxpoll 5 maxdelay .05
+     when: "'gocarts' in group_names"
+
+#  tasks:
+#  # TODO : this relies on yujin package -> also need to set that up
+#  # This task probably requires better user / ssh keys management.
+#   - cron:
+#       name: "Get groot_binaries"
+#       user: root
+#       hour: "17"  # this is 2AM Seoul Time
+#       # echo until we solve the automated authentication problem.
+#       job: "/usr/local/bin/supervisorctl stop concert && /usr/local/bin/groot_binaries --devel && /usr/local/bin/supervisorctl start concert"
+#     become: yes

@@ -1,0 +1,3 @@
+ansible_user: yujin
+syncthing_gopher_share_group: gocarts
+clocksync: ntp

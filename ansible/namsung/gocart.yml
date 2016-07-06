@@ -4,9 +4,7 @@
    - gocart203
    - gocart204
 
-- include: basic.yml
 - include: syncthing_gopher.yml
-  syncthing_share_group: namsung-concert
 
   roles:
   # TODO : chrony
