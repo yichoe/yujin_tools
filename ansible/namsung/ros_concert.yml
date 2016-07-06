@@ -4,12 +4,6 @@
 - hosts:
    - concert
 
-  vars:
-    groot_stream: stable
-    groot_use_external: yes
-    groot_install_rosdeps: yes
-    ros_concert_user: yujin
-
   #strategy: debug
   pre_tasks:
     - name: 'Ensure that we can connect to this host'
@@ -25,12 +19,12 @@
     #      (?i)password: "{{ groot_password }}"
 
     - name: "Calling groot_binaries"
-      command: "groot_binaries --{{ groot_stream }} {{ '--external' if groot_use_external else '' }}"
+      command: "groot_binaries --{{ groot_stream|default(stable) }} {{ '--external' if groot_use_external|default(yes) else '' }}"
       become: yes # we want to always use root here
 
-    - name: "Installing groot_binaries"
-      command: "groot_binaries --{{ groot_stream }} --install-rosdeps"
-      when: groot_install_rosdeps
+    - name: "Installing groot_binaries dependencies"
+      command: "groot_binaries --{{ groot_stream|default(stable) }} --install-rosdeps"
+      when: ""{{ groot_install_rosdeps|default(yes) }}
 
   # TODO : use http://docs.ansible.com/ansible/synchronize_module.html
   # TODO : ansible role to replace groot_binaries
@@ -42,7 +36,7 @@
      supervisor_programs_present:
        ros-concert:
          user: "{{ ros_concert_user }}"
-         command: "/usr/local/bin/groot_start_concert --{{ groot_stream }}"
+         command: "/usr/local/bin/groot_start_concert --{{ groot_stream|default(stable) }}"
          autostart: true
          stopasgroup: true
          stopwaitsecs: 2

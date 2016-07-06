@@ -38,7 +38,7 @@ Currently we assume we launch ansible from a concert machine (until we can confi
     127.0.0.1
     
     [concert]
-    127.0.0.1
+    127.0.0.1 groot_stream=devel
     
     [gocarts]
     gocart201

@@ -1,3 +1,4 @@
 ansible_user: yujin
+ros_concert_user: yujin
 syncthing_gopher_share_group: concert
 clocksync: chrony
