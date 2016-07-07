@@ -1,5 +1,6 @@
 # ansible requirements
 roles/geerlingguy.ntp
+roles/geerlingguy.nginx
 roles/tersmitten.supervisor
 roles/marvinpinto.docker
 

@@ -5,9 +5,6 @@
    delay: 10
    until: result|success
 
- - debug: var=yujin_docker_image_name
- - debug: var=yujin_docker_image_tag
-
  - name: Check we are logged into Docker Hub
    docker_login:
      username: "{{ yujin_dockerhub_user }}"

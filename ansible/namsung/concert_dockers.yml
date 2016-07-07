@@ -44,10 +44,46 @@
 
    - role: yujin-dockers
      tags: yujin-dockers
+     become: yes
      yujin_dockerhub_user: "{{ docker_hub_login }}"
      yujin_dockerhub_password: "{{ docker_hub_password }}"
      yujin_dockerhub_email: "{{ docker_hub_email }}"
      yujin_docker_images: "{{ concert_dockers_images }}"
+
+   - role: geerlingguy.nginx
+     become: yes
+     nginx_remove_default_vhost: false
+     nginx_vhosts:
+      - listen: "80 default_server"
+        extra_parameters: |
+          location /balcony {
+            proxy_pass http://127.0.0.1:4000;
+          }
+          location /rostful {
+            proxy_set_header Host $host;
+            proxy_pass http://127.0.0.1:8080;
+
+            # this (generic proxy setup)
+            #proxy_set_header X-Real-IP  $remote_addr;
+            #proxy_set_header X-Forwarded-For $remote_addr;
+
+            # or that (advised for flask)
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Scheme $scheme;
+            proxy_set_header X-Script-Name /rostful;
+          }
+
+#     nginx_sites_available:
+#     - balcony
+#     nginx_sites_enabled:
+#     - balcony
+#     nginx_sites:
+#       concert:
+#         - "listen 80"
+#         - "server_name concert"
+#         # - "location / { return 301 /balcony }"
+#         - "location /balcony { proxy_pass http://127.0.0.1:4000; }"
+#         - "location /rostful { proxy_pass http://127.0.0.1:8080; }"
 
    - role: asmodehn.supervisor
      become: yes
