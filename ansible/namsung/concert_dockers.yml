@@ -50,11 +50,13 @@
      yujin_docker_images: "{{ concert_dockers_images }}"
 
    - role: asmodehn.supervisor
+     become: yes
      tags: [ yujin-dockers, yujin-dockers-supervisor ]
      supervisor_programs_present: "{{ concert_supervisor_present }}"
 
   post_tasks:
     - name: "Ensure yujin dockers present"
+      become: yes
       tags: [ yujin-dockers, yujin_dockers_restart ]
       supervisorctl:
        name: "{{ item.key }}"

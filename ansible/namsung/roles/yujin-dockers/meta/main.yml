@@ -11,3 +11,4 @@ galaxy_info:
 
 dependencies:
  - role: marvinpinto.docker
+   become: yes
