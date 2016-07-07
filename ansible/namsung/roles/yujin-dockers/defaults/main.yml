@@ -1,5 +1,13 @@
 ---
 yujin_docker_images:
   - name: hello-world
-  - tag: latest
+    tag: latest
+    force: yes
+    supervisor_program_id: hello-world-docker
+yujin_docker_supervisor_programs:
+  hello-world-docker:
+    # This is the config that will allow supervisor to manage the docker container.
+    # Ref : https://galaxy.ansible.com/tersmitten/supervisor/
+    user: yujin
+    command: docker run -i hello-world
 

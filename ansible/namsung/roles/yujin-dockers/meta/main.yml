@@ -10,5 +10,14 @@ galaxy_info:
       - trusty
 
 dependencies:
- - role: marvinpinto.docker
-   become: yes
+  - role: marvinpinto.docker
+    become: yes
+    tags:
+      - yujin-dockers
+
+  - role: asmodehn.supervisor
+    become: yes
+    # here we need to build the dict fo supervisor programs present
+    supervisor_programs_present: "{{ yujin_docker_supervisor_programs }}"
+    tags:
+      - yujin-dockers

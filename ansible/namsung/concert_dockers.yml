@@ -25,10 +25,12 @@
 
   # TODO : get this from a lookup from somewher else
   vars:
-    concert_dockers_images:
+    concert_docker_images:
       - name: yujinrobot/balcony
         tag: latest
-    concert_supervisor_present: # This is the config that will allow supervisor to manage the docker container.
+        force: yes
+        supervisor_program_id: balcony-docker  # needs to match one of the programs_present
+    concert_docker_supervisor_programs_present: # This is the config that will allow supervisor to manage the docker container.
       # Ref : https://galaxy.ansible.com/tersmitten/supervisor/
       balcony-docker:
         user: yujin
@@ -48,7 +50,8 @@
      yujin_dockerhub_user: "{{ docker_hub_login }}"
      yujin_dockerhub_password: "{{ docker_hub_password }}"
      yujin_dockerhub_email: "{{ docker_hub_email }}"
-     yujin_docker_images: "{{ concert_dockers_images }}"
+     yujin_docker_images: "{{ concert_docker_images }}"
+     yujin_docker_supervisor_programs: "{{ concert_docker_supervisor_programs_present }}"
 
    - role: geerlingguy.nginx
      become: yes
@@ -85,16 +88,17 @@
 #         - "location /balcony { proxy_pass http://127.0.0.1:4000; }"
 #         - "location /rostful { proxy_pass http://127.0.0.1:8080; }"
 
-   - role: asmodehn.supervisor
-     become: yes
-     tags: [ yujin-dockers, yujin-dockers-supervisor ]
-     supervisor_programs_present: "{{ concert_supervisor_present }}"
+#   - role: asmodehn.supervisor
+#     become: yes
+#     tags: [ yujin-dockers, yujin-dockers-supervisor ]
+#     yujin_docker_images: "{{ concert_docker_images }}"
+#     yujin_docker_supervisor_programs: "{{ concert_docker_supervisor_programs_present }}"
 
-  post_tasks:
-    - name: "Ensure yujin dockers present"
-      become: yes
-      tags: [ yujin-dockers, yujin_dockers_restart ]
-      supervisorctl:
-       name: "{{ item.key }}"
-       state: present
-      with_dict: "{{ concert_supervisor_present }}"
+#  post_tasks:
+#    - name: "Ensure yujin dockers present"
+#      become: yes
+#      tags: [ yujin-dockers, yujin_dockers_restart ]
+#      supervisorctl:
+#       name: "{{ item.key }}"
+#       state: present
+#      with_dict: "{{ concert_supervisor_present }}"
