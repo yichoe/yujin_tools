@@ -1,13 +1,11 @@
 #
 # Playbook to install baclony docker, preconfigured for gopher usage.
 #
-- hosts:
+- name: ANSIBLE - Concert Dockers installation
+  hosts:
     - concert
 
   #strategy: debug
-  pre_tasks:
-   - name: 'Ensure that we can connect to this host'
-     ping:
 
   vars_prompt:
    - name: "docker_hub_login"
@@ -42,6 +40,43 @@
         stdout_logfile: "/var/log/supervisor/balcony-docker.out.log"
         stderr_logfile: "/var/log/supervisor/balcony-docker.err.log"
     # important:  here we can add a bunch of other yujin docker images with their configuration
+
+  pre_tasks:
+   - name: 'Ensure that we can connect to this host'
+     ping:
+
+   - name: 'Ensure we have latest version of index page'
+     git:
+       repo: git@bitbucket.org:yujinrobot/rocon_static_web.git
+       dest: /opt/www/rocon_static_web
+       accept_hostkey: yes
+     become: yes
+
+   - name: 'Ensure nodejs is installed'
+     become: yes
+     apt:
+       pkg: nodejs
+       state: present
+
+   - name: 'Ensure node command is available to use - ubuntu needs a symlink'
+     become: yes
+     file:
+       src: nodejs
+       dest: /usr/bin/node
+       state: link
+
+   - name: 'Ensure bower is installed'
+     become: yes
+     npm:
+       name: bower
+       global: yes
+       state: present
+
+   - name: "Ensure bower dependencies are installed"
+     become: yes
+     bower:
+       path: /opt/www/rocon_static_web
+
   roles:
 
    - role: yujin-dockers
@@ -55,9 +90,10 @@
 
    - role: geerlingguy.nginx
      become: yes
-     nginx_remove_default_vhost: false
+     nginx_remove_default_vhost: true
      nginx_vhosts:
       - listen: "80 default_server"
+        root: "/opt/www/rocon_static_web"
         extra_parameters: |
           location /balcony {
             proxy_pass http://127.0.0.1:4000;
@@ -94,11 +130,3 @@
 #     yujin_docker_images: "{{ concert_docker_images }}"
 #     yujin_docker_supervisor_programs: "{{ concert_docker_supervisor_programs_present }}"
 
-#  post_tasks:
-#    - name: "Ensure yujin dockers present"
-#      become: yes
-#      tags: [ yujin-dockers, yujin_dockers_restart ]
-#      supervisorctl:
-#       name: "{{ item.key }}"
-#       state: present
-#      with_dict: "{{ concert_supervisor_present }}"
