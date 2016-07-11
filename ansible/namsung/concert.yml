@@ -3,8 +3,9 @@
 
 - include: clocksync.yml
 - include: syncthing_gopher.yml
-- include: yujin.yml
-#- include: docker_balcony.yml
+- include: groot_concert.yml
+- include: balcony_docker.yml
+- include: concert_portal.yml
 
 
 

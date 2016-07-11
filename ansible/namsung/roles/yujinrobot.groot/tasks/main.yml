@@ -17,14 +17,14 @@
 #
 
 # Currently broken (Ansible 2.1.0.0)
-#- name: synchronize binaries from internal files.yujin.com server
+#- name: synchronize binaries from internal files.yujinrobot.yujin.com server
 #  become: yes
 #  synchronize:
 #    links: yes
 #    recursive: yes
 #    delete: yes
-#    src: "files@files.yujin.com:shared/installspaces/yujin/amd64/indigo-{{ groot_stream }}"
-#    dest: /opt/yujin/amd64
+#    src: "files@files.yujinrobot.yujin.com:shared/installspaces/yujinrobot.yujin/amd64/indigo-{{ groot_stream }}"
+#    dest: /opt/yujinrobot.yujin/amd64
 #    mode: pull
 #  delegate_to: "{{ inventory_hostname }}"
 #  when: not groot_use_external
@@ -35,8 +35,8 @@
 #    links: yes
 #    recursive: yes
 #    delete: yes
-#    src: /opt/yujin/amd64
-#    dest: "/data/file_server/rsync_repositories/yujin/amd64/indigo-{{ groot_stream }}"
+#    src: /opt/yujinrobot.yujin/amd64
+#    dest: "/data/file_server/rsync_repositories/yujinrobot.yujin/amd64/indigo-{{ groot_stream }}"
 #    mode: pull  # has to be push because of user permissions (ansible versus rsync/ssh settings)
 #  delegate_to: "{{ inventory_hostname }}"
 #  when: groot_use_external

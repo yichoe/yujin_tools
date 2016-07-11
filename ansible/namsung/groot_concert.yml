@@ -1,0 +1,61 @@
+#
+# Playbook to ensure concert groot software is installed configured and running as expected
+#
+---
+- name: ANSIBLE - Concert installation
+  hosts:
+    - concert
+
+  vars:
+  - yujin_stream: devel
+
+  pre_tasks:
+  - name: 'Ensure that we can connect to this host'
+    ping:
+
+  #TODO : improve this workflow to make tasks idempotent, and restart things only when there is groot binary change
+  - name: Forcing supervisor stop since we will always call groot binaries command
+    become: yes
+    supervisorctl:
+      name: ros-concert
+      state: stopped
+
+# ansible-galaxy is not idempotent yet, and we cannot force update, so let the user do it manually
+#   - name: 'Ensure we have galaxy dependencies installed'
+#     local_action: command ansible-galaxy install -r requirements.yml -p roles
+
+  roles:
+  - role: yujinrobot.groot
+    groot_stream: "{{ yujin_stream }}"
+    groot_use_external: true
+
+  - role: asmodehn.supervisor
+    supervisor_version: apt
+    tags: concert-supervisor
+    become: yes
+    supervisor_programs_present:
+      ros-concert:
+        user: "{{ ros_concert_user }}"
+        command: "/usr/local/bin/groot_start_concert --devel"
+        autostart: true
+        stopasgroup: true
+        stopwaitsecs: 2
+        killasgroup: true
+        stdout_logfile: /var/log/supervisor/ros-concert.out.log
+        stderr_logfile: /var/log/supervisor/ros-concert.err.log
+    when: "'concert' in group_names"
+
+  post_tasks:
+    # TODO : find a way to get status from groot role, only trigger a restart if groot binaries changed something...
+    - name: Forcing supervisor start
+      become: yes
+      supervisorctl:
+        name: ros-concert
+        state: started
+
+    - name: Check if roslaunch is running more than once # we should have only one roslaunch on the concert -> no sim until we get a reliable stop/start process
+      shell: sleep 5 && ps aux | grep roslaunch | grep -v grep | wc -l
+      ignore_errors: yes
+      changed_when: false
+      failed_when: "roslaunch_running.stdout != '1'"
+      register: roslaunch_running

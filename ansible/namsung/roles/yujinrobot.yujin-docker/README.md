@@ -13,21 +13,21 @@ Requirements
 Role Variables
 --------------
 
- - balcony_dockerhub_user: The username on dockerhub used to retrieve balcony image
- - balcony_dockerhub_password: the password
- - balcony_dockerhub_email: the email address 
+ - yujin_dockerhub_user: The username on dockerhub used to retrieve balcony image
+ - yujin_dockerhub_password: the password
+ - yujin_dockerhub_email: the email address 
+ - yujin_docker_image: the docker image
 
 Dependencies
 ------------
 
  - marvinpinto.docker
- - tersmitten.supervisor
  
 Example Playbook
 ----------------
 
     - hosts: 
-       - gocart-server
+       - concert
       pre_tasks:
         - name: 'Ensure that we can connect to this host'
           ping:
@@ -46,12 +46,15 @@ Example Playbook
          tags: docker
       roles:
        
-       - role: balcony-docker
-         tags: balcony-docker
-         balcony_dockerhub_user: "{{ docker_hub_login }}"
-         balcony_dockerhub_password: "{{ docker_hub_password }}"
-         balcony_dockerhub_email: "{{ docker_hub_email }}"
-         become: yes
+       - role: yujinrobot.yujin-docker
+         tags: yujinrobot.yujin-docker
+         yujin_dockerhub_user: "{{ docker_hub_login }}"
+         yujin_dockerhub_password: "{{ docker_hub_password }}"
+         yujin_dockerhub_email: "{{ docker_hub_email }}"
+         yujin_docker_image:
+           name: hello-world
+           tag: latest
+           force: yes
 
 License
 -------

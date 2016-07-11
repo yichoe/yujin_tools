@@ -3,6 +3,7 @@ roles/geerlingguy.ntp
 roles/geerlingguy.nginx
 roles/tersmitten.supervisor
 roles/marvinpinto.docker
+roles/yujinrobot.rocon_static_web
 
 # Editor
 .idea

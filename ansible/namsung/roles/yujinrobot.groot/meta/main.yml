@@ -11,4 +11,4 @@ galaxy_info:
     - trusty
 
 dependencies:
-  - role: yujin
+  - role: yujinrobot.yujin

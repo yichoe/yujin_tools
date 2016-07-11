@@ -1,19 +1,25 @@
- - src: geerlingguy.ntp
- - src: geerlingguy.nginx
+---
+- src: geerlingguy.ntp
+- src: geerlingguy.nginx
 
- # - src: tersmitten.supervisor
+# - src: tersmitten.supervisor
 
- - src: marvinpinto.docker
+- src: marvinpinto.docker
 
 # Somehow we dont get git clones with this
 # => using submodules for now
 
- #- src: https://github.com/asmodehn/ansible-syncthing-debian.git
- #  version: master
- #  name: asmodehn.syncthing
- #  scm: git
+# - src: https://github.com/asmodehn/ansible-syncthing-debian.git
+#   version: master
+#   name: asmodehn.syncthing
+#   scm: git
 
 # - src: https://github.com/asmodehn/ansible-role-ros.git
 #   version: master
 #   name: asmodehn.ros
 #   scm: git
+
+- name: yujinrobot.rocon_static_web
+  src: ssh://git@bitbucket.org/yujinrobot/ansible-role-rocon_static_web.git
+  scm: git
+  version: master  # we should probably stick to master until we have multiple incompatible major versions...

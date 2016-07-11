@@ -1,0 +1,19 @@
+---
+- name: 'Ensure that the docker daemon is functional'
+  docker_ping:
+  retries: 5
+  delay: 10
+  until: result|success
+
+- name: Check we are logged into Docker Hub
+  docker_login:
+    username: "{{ yujin_dockerhub_user }}"
+    password: "{{ yujin_dockerhub_password }}"
+    email: "{{ yujin_dockerhub_email }}"
+
+- name: Ensure docker image has the proper version
+  docker_image:
+    name: "{{ yujin_docker_image.name }}"
+    tag: "{{ yujin_docker_image.tag }}"
+    force: "{{ yujin_docker_image.force }}"
+

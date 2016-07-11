@@ -88,26 +88,32 @@ Running Playbooks
      or only on concert:
     `ansible-playbook clocksync.yml --ask-vault-pass -K --limit concert`
 
-* Run `concert_dockers.yml` to ensure the concert dockers are setup and running on concert (local) server
-    
-    `ansible-playbook concert_dockers.yml --ask-vault-pass -K`
-
-* Run `ros_concert.yml` to ensure the ros_concert software is setup and running on concert (local) server
-
-    `ansible-playbook ros_concert.yml --ask-vault-pass -K`
-     to make sure we re installing groot --devel ( this will override local config )
-     `ansible-playbook ros_concert.yml --ask-vault-pass -K -e groot_stream="devel"`
-
-    
 * Run `syncthing_gopher.yml` to ensure syncthing is setup and running on both robots and concert
 
     `ansible-playbook syncthing_gopher.yml --ask-vault-pass -K`
      or only on a specific robot:
     `ansible-playbook syncthing_gopher.yml --ask-vault-pass -K --limit gocart203`
+
+* Run `groot_concert.yml` to ensure the ros_concert software is setup and running on concert (local) server
+
+    `ansible-playbook groot_concert.yml --ask-vault-pass -K`
+     To make sure we re installing groot --stable ( this will override local config )
+     `ansible-playbook groot_concert.yml --ask-vault-pass -K -e yujin_stream="stable"`
+
+* Run `balcony_docker.yml` to ensure the balcony docker is setup and running on concert (local) server
     
-* Run `concert.yml` to ensure concert server is setup and running (master playbook). 
-* TODO : `ros_gopher.yml` to ensure ros_gopher software is setup and running on robots
-* TODO : `gocart.yml` to ensure gocart robot is setup and running (master playbook).
+    `ansible-playbook balcony_docker.yml --ask-vault-pass -K`
+    To make sure we re installing the stable version ( this will override local config )
+     `ansible-playbook balcony_docker.yml --ask-vault-pass -K -e yujin_stream="stable"`
+
+* Run `concert_portal.yml` to ensure the concert_portal software is setup and running on concert (local) server
+
+    `ansible-playbook concert_portal.yml --ask-vault-pass -K`
+     To make sure we re installing groot --stable ( this will override local config )
+     `ansible-playbook concert_portal.yml --ask-vault-pass -K -e yujin_stream="stable"`
+    
+* Run `concert.yml` to ensure full concert server is setup and running (master playbook).
+
 
  
   

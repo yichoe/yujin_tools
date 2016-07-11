@@ -1,0 +1,41 @@
+#
+# Playbook to install concert devel software
+# Currently in development
+#
+- name: ANSIBLE - Concert Devel installation
+  hosts:
+    - concert
+
+  pre_tasks:
+  - name: 'Ensure that we can connect to this host'
+    ping:
+
+# ansible-galaxy is not idempotent yet, and we cannot force update, so let the user do it manually
+#   - name: 'Ensure we have galaxy dependencies installed'
+#     local_action: command ansible-galaxy install -r requirements.yml -p roles
+
+  roles:
+  - role: yujinrobot.rocon_static_web  # your ssh access to the repository should be already setup.
+    become: yes  # this is a website managed by root
+    rocon_static_web_version: "{{ yujin_stream }}"
+    rocon_static_web_dest: /opt/rocon_static_web  # careful with the path and user permissions
+
+  - role: geerlingguy.nginx
+    become: yes
+    nginx_remove_default_vhost: true
+    nginx_vhosts:
+    - listen: "80 default_server"
+      root: "/opt/rocon_static_web/www"
+      extra_parameters: |
+        location /balcony {
+          proxy_pass http://127.0.0.1:4000;
+        }
+        location /rostful {
+          proxy_set_header Host $host;
+          proxy_pass http://127.0.0.1:8080;
+
+          # or that (advised for flask)
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Scheme $scheme;
+          proxy_set_header X-Script-Name /rostful;
+        }
