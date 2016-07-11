@@ -11,7 +11,7 @@ galaxy_info:
     - trusty
 
 dependencies:
-  - role: asmodehn.ros
+  - role: yujinrobot.ros
     become: yes
     ros_release: "indigo"
     ros_package: "ros-base"

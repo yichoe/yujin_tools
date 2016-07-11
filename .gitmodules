@@ -1,15 +1,12 @@
 [submodule "ansible/namsung/roles/asmodehn.syncthing"]
 	path = ansible/namsung/roles/asmodehn.syncthing
 	url = https://github.com/asmodehn/ansible-syncthing-debian.git
-[submodule "ansible/namsung/roles/asmodehn.ros"]
-	path = ansible/namsung/roles/asmodehn.ros
-	url = https://github.com/asmodehn/ansible-role-ros.git
 [submodule "ansible/namsung/roles/asmodehn.supervisor"]
 	path = ansible/namsung/roles/asmodehn.supervisor
 	url = https://github.com/asmodehn/ansible-supervisor.git
 [submodule "ansible/namsung/roles/asmodehn.chrony"]
 	path = ansible/namsung/roles/asmodehn.chrony
 	url = https://github.com/asmodehn/ansible-role-chrony.git
-[submodule "ansible/namsung/roles/asmodehn.nginx"]
-	path = ansible/namsung/roles/asmodehn.nginx
-	url = https://github.com/asmodehn/ansible-role-nginx.git
+[submodule "ansible/namsung/roles/yujinrobot.ros"]
+	path = ansible/namsung/roles/yujinrobot.ros
+	url = http://github.com/yujinrobot/ansible-role-ros
