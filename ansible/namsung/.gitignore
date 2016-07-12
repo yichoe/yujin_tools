@@ -5,5 +5,8 @@ roles/tersmitten.supervisor
 roles/marvinpinto.docker
 roles/yujinrobot.rocon_static_web
 
+# Ansible
+*.retry
+
 # Editor
 .idea

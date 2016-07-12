@@ -11,6 +11,17 @@
   command: "groot_binaries --{{ groot_stream|default(stable) }} {{ '--external' if groot_use_external|default(True) else '' }}"
   become: yes # we want to always use root here
 
+# fixing https://github.com/yujinrobot/yujin_tools/issues/93
+- name: "Fixing permissions in groot_binaries structure"
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: "g+rx,o+rx"
+  become: yes
+  with_items:
+  - /opt/yujin/amd64/indigo-devel/share
+  - /opt/yujin/amd64/indigo-devel/lib
+
 #- name: "Installing groot_binaries dependencies"
 #  command: "groot_binaries --{{ groot_stream|default(stable) }} --install-rosdeps"
 #  when: "{{ groot_install_rosdeps|default(True) }}"
@@ -40,6 +51,18 @@
 #    mode: pull  # has to be push because of user permissions (ansible versus rsync/ssh settings)
 #  delegate_to: "{{ inventory_hostname }}"
 #  when: groot_use_external
+
+
+- name: rosdep init
+  command: "rosdep init"
+  args:
+    creates: /etc/ros/rosdep/sources.list.d/20-default.list
+  become: yes
+  changed_when: false  # we can probably ignore this, since changes would come from a change in previous task
+
+- name: rosdep update
+  command: "rosdep update"
+  changed_when: false  # we can probably ignore this, since changes would come from a change in previous task
 
 - name: rosdep install
   command: "rosdep install -r --default-yes --from-paths /opt/yujin/amd64/indigo-{{ groot_stream }} --ignore-src"
