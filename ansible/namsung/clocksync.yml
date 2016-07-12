@@ -12,6 +12,7 @@
 
   roles:
    - role: geerlingguy.ntp
+     become: yes
      tags: ntp
      ntp_enabled: true
      ntp_timezone: Etc/UTC
