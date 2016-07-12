@@ -21,6 +21,7 @@
       state: stopped
 
 # ansible-galaxy is not idempotent yet, and we cannot force update, so let the user do it manually
+# Ref. https://github.com/ansible/ansible/issues/11266
 #   - name: 'Ensure we have galaxy dependencies installed'
 #     local_action: command ansible-galaxy install -r requirements.yml -p roles
 
@@ -36,7 +37,7 @@
     supervisor_programs_present:
       ros-concert:
         user: "{{ ros_concert_user }}"
-        command: "/usr/local/bin/groot_start_concert --devel"
+        command: "/opt/yujin/amd64/indigo-{{ yujin_stream }}/share/gopher_desktop_utilities/scripts/concert_server"
         autostart: true
         stopasgroup: true
         stopwaitsecs: 2
@@ -47,11 +48,11 @@
 
   post_tasks:
     # TODO : find a way to get status from groot role, only trigger a restart if groot binaries changed something...
-    - name: Forcing supervisor start
+    - name: Supervisor update and restart
       become: yes
       supervisorctl:
         name: ros-concert
-        state: started
+        state: restarted
 
     - name: Check if roslaunch is running more than once # we should have only one roslaunch on the concert -> no sim until we get a reliable stop/start process
       shell: sleep 5 && ps aux | grep roslaunch | grep -v grep | wc -l
