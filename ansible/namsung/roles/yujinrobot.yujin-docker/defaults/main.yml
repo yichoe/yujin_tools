@@ -1,4 +1,5 @@
 ---
+yujin_docker_user: yujin
 yujin_docker_image:
   name: hello-world
   tag: latest

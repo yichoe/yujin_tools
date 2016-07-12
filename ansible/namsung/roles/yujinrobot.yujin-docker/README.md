@@ -17,6 +17,7 @@ Role Variables
  - yujin_dockerhub_password: the password
  - yujin_dockerhub_email: the email address 
  - yujin_docker_image: the docker image
+ - yujin_docker_user: the user to add to docker group
 
 Dependencies
 ------------

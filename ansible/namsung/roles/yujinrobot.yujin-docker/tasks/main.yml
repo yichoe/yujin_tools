@@ -1,4 +1,14 @@
 ---
+# WARNING : this will not work the first time :
+# Ref. https://github.com/ansible/ansible-modules-core/issues/921
+- name: Ensure the user is in docker group
+  become: yes
+  user:
+    name: "{{ yujin_docker_user }}"
+    groups: docker
+    append: yes
+
+
 - name: 'Ensure that the docker daemon is functional'
   docker_ping:
   retries: 5
