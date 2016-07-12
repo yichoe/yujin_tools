@@ -13,12 +13,13 @@
   - name: 'Ensure that we can connect to this host'
     ping:
 
-  #TODO : improve this workflow to make tasks idempotent, and restart things only when there is groot binary change
-  - name: Forcing supervisor stop since we will always call groot binaries command
-    become: yes
-    supervisorctl:
-      name: ros-concert
-      state: stopped
+#  #TODO : improve this workflow to make tasks idempotent, and restart things only when there is groot binary change
+#  - name: Forcing supervisor stop since we will always call groot binaries command
+#    become: yes
+#    supervisorctl:
+#      name: ros-concert
+#      state: stopped
+# THIS fails the first time since the service does not exists... disabling for now
 
 # ansible-galaxy is not idempotent yet, and we cannot force update, so let the user do it manually
 # Ref. https://github.com/ansible/ansible/issues/11266

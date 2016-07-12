@@ -92,6 +92,7 @@
      syncthing_gui_apikey: "{{ vault_syncthing_gopher_gui_apikey }}"
 
    - role: asmodehn.supervisor
+     supervisor_version: apt
      tags: syncthing-supervisor
      become: yes
      supervisor_programs_present:
