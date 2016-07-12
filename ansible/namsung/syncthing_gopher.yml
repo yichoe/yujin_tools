@@ -21,7 +21,6 @@
      fail: msg="Bailing out this play requires '{{ item }}'"
      when: item is not defined
      with_items:
-      - syncthing_share_group
       - vault_syncthing_gopher_gui_user
       - vault_syncthing_gopher_gui_password_bcrypt
       - vault_syncthing_gopher_gui_apikey
@@ -37,22 +36,51 @@
   roles:
 
    - role: asmodehn.syncthing
+     when: "'concert' in group_names"
      tags: syncthing-setup
      syncthing_version: 0.13.9
      syncthing_system_user: "{{ syncthing_gopher_user }}"
      syncthing_system_group: "{{ syncthing_gopher_user }}"
 
      syncthing_folders:
-       - id: "{{ inventory_hostname }}-gopher-sync"
-         label: "{{ inventory_hostname }}-gopher-sync"
-         path: "/home/{{ syncthing_gopher_user }}/.ros/gopher/sync/"
+       - id: "{{ inventory_hostname }}-gopher-maps"
+         label: "{{ inventory_hostname }}-gopher-maps"
+         path: "/home/{{ syncthing_gopher_user }}/.ros/gopher/maps/"
          ignore_patterns:
           - sync
          shared_with_groups:
-          - "{{ syncthing_gopher_share_group }}"
+          - gocarts
 
      syncthing_net_groups:
-      - "{{ syncthing_gopher_share_group }}"
+      - gocarts
+
+     syncthing_gui_enable: true
+     syncthing_gui_enable_tls: false
+     syncthing_gui_host: 0.0.0.0
+     syncthing_gui_port: 8384
+
+     syncthing_gui_user: "{{ vault_syncthing_gopher_gui_user }}"
+     syncthing_gui_password_bcrypt: "{{ vault_syncthing_gopher_gui_password_bcrypt }}"
+     syncthing_gui_apikey: "{{ vault_syncthing_gopher_gui_apikey }}"
+
+   - role: asmodehn.syncthing
+     when: "'gocarts' in group_names"
+     tags: syncthing-setup
+     syncthing_version: 0.13.9
+     syncthing_system_user: "{{ syncthing_gopher_user }}"
+     syncthing_system_group: "{{ syncthing_gopher_user }}"
+
+     syncthing_folders:
+       - id: "{{ inventory_hostname }}-gopher-datalog"
+         label: "{{ inventory_hostname }}-gopher-datalog"
+         path: "/home/{{ syncthing_gopher_user }}/.ros/gopher/datalog/"
+         ignore_patterns:
+          - sync
+         shared_with_groups:
+          - concert
+
+     syncthing_net_groups:
+      - concert
 
      syncthing_gui_enable: true
      syncthing_gui_enable_tls: false

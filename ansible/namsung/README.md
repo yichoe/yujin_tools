@@ -21,38 +21,48 @@ Since:
 - there is no DNS setup, only hostnames defined in /etc/hosts on all hosts
 - there is no user policy except "yujin is the known user that has sudo privileges"
 
-It makes sense to centralise all deployment to be executed from the concert server.
-So on the concert server install ansible : 
+On the machine doing the deployment, install ansible : 
 
     sudo apt-get install ansible
 
-Make sure your hostnames are setup properly and setup your network inventory in /etc/ansible/hosts.
-Currently we assume we launch ansible from a concert machine (until we can configure concert hostname in software):
+Make sure your hostnames are setup properly in /etc/hosts.
+Setup your network inventory in /etc/ansible/hosts like:
 
+    # for direct access
     gocart201
     gocart202
     gocart203
     gocart204
 
+    # for local access
     [local]
     127.0.0.1
     
+    # mandatory to define concert machines
     [concert]
-    127.0.0.1 groot_stream=devel
+    192.168.3.3
     
+    # mandatory to define gocart machines
     [gocarts]
     gocart201
     gocart202
     gocart203
     gocart204
-    
-BEWARE : You should NOT use this configuration on your own machine.
-Because of the lack of DNS, the necessary local setup to execute remotely is quite different.
 
-Make sure the yujin user can access all robots, and from there you should be able to deploy:
+[concert] and [gocarts] are two mandatory inventory groups that are used in the deployment scripts here.
+They define if a machine is to be deployed like a concert server or like a gocart robot.
 
- - the concert software locally by using the playbooks in this repository
- - the robot software remotely by using the playbooks in this repository
+Make sure your local user can connect to the yujin user on the remote machine.
+Make sure the yujin user has passwordless sudo access to root.
+From there you should be able to deploy:
+
+ - clock synchronization configuration using clocksync.yml
+ - syncthing using syncthing_gopher.yml
+ - the concert web portal via concert_portal.yml
+ - the concert ROS software using groot_concert.yml
+ - the balcony docker using balcony_docker.yml
+ 
+TODO : Robot software
 
 Getting ready
 -------------
