@@ -6,6 +6,8 @@
 
 - src: marvinpinto.docker
 
+- src: nodesource.node
+
 # Somehow we dont get git clones with this
 # => using submodules for now
 
