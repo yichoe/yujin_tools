@@ -49,15 +49,7 @@
 
   post_tasks:
     # TODO : find a way to get status from groot role, only trigger a restart if groot binaries changed something...
-    - name: Supervisor update and restart
+    - name: Supervisorctl restart
       become: yes
-      supervisorctl:
-        name: ros-concert
-        state: restarted
-
-    - name: Check if roslaunch is running more than once # we should have only one roslaunch on the concert -> no sim until we get a reliable stop/start process
-      shell: sleep 5 && ps aux | grep roslaunch | grep -v grep | wc -l
-      ignore_errors: yes
-      changed_when: false
-      failed_when: "roslaunch_running.stdout != '1'"
-      register: roslaunch_running
+      shell: "supervisorctl restart ros-concert"
+      # supervisorctl ansible module is buggy. using shell command instead.

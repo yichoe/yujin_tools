@@ -40,7 +40,7 @@
     yujin_dockerhub_email: "{{ docker_hub_email }}"
     yujin_docker_image:
       name: yujinrobot/balcony
-      tag: latest  # TODO : switch to "devel"
+      tag: devel
       force: yes
 
   - role: asmodehn.supervisor
@@ -50,10 +50,17 @@
     supervisor_programs_present:
       balcony-docker:
         user: yujin
-        command: docker run -i --net=\"host\"  yujinrobot/balcony
+        command: docker run -i --net=\"host\" yujinrobot/balcony:devel
         stopasgroup: true
         stopwaitsecs: 2
         killasgroup: true
         autostart: true
         stdout_logfile: "/var/log/supervisor/balcony-docker.out.log"
         stderr_logfile: "/var/log/supervisor/balcony-docker.err.log"
+
+  post_tasks:
+    # TODO : restart only if image changed
+    - name: Supervisorctl restart
+      become: yes
+      shell: "supervisorctl restart balcony-docker"
+      # supervisorctl ansible module is buggy. using shell command instead.
