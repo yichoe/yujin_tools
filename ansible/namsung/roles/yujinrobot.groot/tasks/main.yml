@@ -65,5 +65,7 @@
   changed_when: false  # we can probably ignore this, since changes would come from a change in previous task
 
 - name: rosdep install
-  command: "rosdep install -r --default-yes --from-paths /opt/yujin/amd64/indigo-{{ groot_stream }} --ignore-src"
+  shell: "source /opt/yujin/amd64/indigo-{{ groot_stream }}/setup.bash && rosdep install -r --default-yes --from-paths /opt/yujin/amd64/indigo-{{ groot_stream }} --ignore-src"
+  args:
+     executable: /bin/bash
   changed_when: false  # we can probably ignore this, since changes would come from a change in previous task
