@@ -2,7 +2,7 @@
 # Playbook to install concert devel software
 # Currently in development
 #
-- name: ANSIBLE - Concert Devel installation
+- name: ANSIBLE - Concert Web Portal
   hosts:
     - concert
 

@@ -2,7 +2,7 @@
 # Playbook to ensure concert groot software is installed configured and running as expected
 #
 ---
-- name: ANSIBLE - Concert installation
+- name: ANSIBLE - ROS Concert
   hosts:
     - concert
 
@@ -49,7 +49,7 @@
 
   post_tasks:
     # TODO : find a way to get status from groot role, only trigger a restart if groot binaries changed something...
-    - name: Supervisorctl restart
+    - name: Supervisorctl restart ros-concert
       become: yes
       shell: "supervisorctl restart ros-concert"
       # supervisorctl ansible module is buggy. using shell command instead.

@@ -1,8 +1,8 @@
 # ansible requirements
 roles/geerlingguy.ntp
 roles/geerlingguy.nginx
-roles/tersmitten.supervisor
 roles/marvinpinto.docker
+roles/nodesource.node
 roles/yujinrobot.rocon_static_web
 
 # Ansible

@@ -1,9 +1,7 @@
-- hosts:
+- name:  ANSIBLE - Clock Sync
+  hosts:
    - concert
-   - gocart201
-   - gocart202
-   - gocart203
-   - gocart204
+   - gocarts
 
   #strategy: debug
   pre_tasks:
@@ -30,14 +28,3 @@
      chrony_server:
        - concert minpoll 0 maxpoll 5 maxdelay .05
      when: "'gocarts' in group_names"
-
-#  tasks:
-#  # TODO : this relies on yujin package -> also need to set that up
-#  # This task probably requires better user / ssh keys management.
-#   - cron:
-#       name: "Get groot_binaries"
-#       user: root
-#       hour: "17"  # this is 2AM Seoul Time
-#       # echo until we solve the automated authentication problem.
-#       job: "/usr/local/bin/supervisorctl stop concert && /usr/local/bin/groot_binaries --devel && /usr/local/bin/supervisorctl start concert"
-#     become: yes

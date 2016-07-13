@@ -1,12 +1,10 @@
 #
 # Playbook to install syncthing, preconfigured for gopher usage.
 #
-- hosts:
+- name:  ANSIBLE - Syncthing
+  hosts:
    - concert
-   - gocart201
-   - gocart202
-   - gocart203
-   - gocart204
+   - gocarts
 
   vars:
     syncthing_gopher_user: yujin
@@ -104,11 +102,9 @@
          stdout_logfile: /var/log/supervisor/syncthing.out.log
          stderr_logfile: /var/log/supervisor/syncthing.err.log
 
-#  post_tasks:
-#    - name: start syncthing service via supervisor
-#      become: yes
-#      supervisorctl:
-#        name: syncthing
-#        state: restarted
-#      tags:
-#        - syncthing-start
+  post_tasks:
+    # TODO : find a way to get status from groot role, only trigger a restart if groot binaries changed something...
+    - name: Supervisorctl restart syncthing
+      become: yes
+      shell: "supervisorctl restart syncthing"
+      # supervisorctl ansible module is buggy. using shell command instead.
