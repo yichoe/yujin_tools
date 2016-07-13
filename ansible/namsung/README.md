@@ -89,6 +89,15 @@ Getting ready
 
 `ansible-playbook concert.yml --list-tasks --ask-vault-pass`
 
+ * To list all hosts for a playbook run:
+
+`ansible-playbook concert.yml --list-hosts --ask-vault-pass`
+
+ * To limit a playbook run to a subset of hosts:
+
+`ansible-playbook concert.yml --list-hosts --ask-vault-pass --limit gocart-server-devel`
+
+
 Running Playbooks
 -----------------
 
