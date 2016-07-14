@@ -1,0 +1,66 @@
+#
+# Playbook to ensure gateway is isntalled, configured and running as expected
+#
+---
+- name: ANSIBLE - Gateway
+  hosts:
+    - concert
+
+  vars:
+  - yujin_stream: devel
+
+  vars_prompt:
+   - name: "docker_hub_login"
+     prompt: "Docker Hub Username"
+     private: no
+     tags: gateway-docker
+   - name: "docker_hub_password"
+     prompt: "Docker Hub password"
+     private: yes
+     tags: gateway-docker
+   - name: "docker_hub_email"
+     prompt: "Docker Hub email"
+     private: no
+     tags: gateway-docker
+
+  pre_tasks:
+  - name: 'Ensure that we can connect to this host'
+    ping:
+
+# ansible-galaxy is not idempotent yet, and we cannot force update, so let the user do it manually
+#   - name: 'Ensure we have galaxy dependencies installed'
+#     local_action: command ansible-galaxy install -r requirements.yml -p roles
+
+  roles:
+
+  - role: yujinrobot.yujin-docker
+    tags: gateway-docker
+    yujin_dockerhub_user: "{{ docker_hub_login }}"
+    yujin_dockerhub_password: "{{ docker_hub_password }}"
+    yujin_dockerhub_email: "{{ docker_hub_email }}"
+    yujin_docker_image:
+      name: yujinrobot/rocon_api_gateway
+      tag: devel
+      force: yes
+
+  - role: asmodehn.supervisor
+    supervisor_version: apt
+    tags: gateway-docker
+    become: yes
+    supervisor_programs_present:
+      gateway-docker:
+        user: yujin
+        command: docker run -i --net=\"host\" yujinrobot/rocon_api_gateway:devel
+        stopasgroup: true
+        stopwaitsecs: 2
+        killasgroup: true
+        autostart: true
+        stdout_logfile: "/var/log/supervisor/gateway-docker.out.log"
+        stderr_logfile: "/var/log/supervisor/gateway-docker.err.log"
+
+  post_tasks:
+    # TODO : restart only if image changed
+    - name: Supervisorctl restart
+      become: yes
+      shell: "supervisorctl restart gateway-docker"
+      # supervisorctl ansible module is buggy. using shell command instead.
