@@ -8,6 +8,8 @@
 
   vars:
   - yujin_stream: devel
+  - balcony_conf_directory: /opt/groot/balcony
+  - gateway_public_hostname: concert  # TODO : should be {{ inventory_hostname }}
 
   vars_prompt:
    - name: "docker_hub_login"
@@ -33,6 +35,7 @@
 
   roles:
 
+  # TODO : special role for balcony docker since we need configuration and all that...
   - role: yujinrobot.yujin-docker
     tags: balcony-docker
     yujin_dockerhub_user: "{{ docker_hub_login }}"
@@ -50,7 +53,7 @@
     supervisor_programs_present:
       balcony-docker:
         user: yujin
-        command: docker run -i --net=\"host\" yujinrobot/balcony:devel
+        command: docker run -i --net=\"host\" -v "{{ balcony_conf_directory }}:/app/config/userConfig" yujinrobot/balcony:devel
         stopasgroup: true
         stopwaitsecs: 2
         killasgroup: true
@@ -59,8 +62,27 @@
         stderr_logfile: "/var/log/supervisor/balcony-docker.err.log"
 
   post_tasks:
-    # TODO : restart only if image changed
-    - name: Supervisorctl restart
+
+    - name: Ensure configuration directory exists
+      file:
+        path: "{{ balcony_conf_directory }}"
+        recurse: yes
+        state: directory
+
+    - name: Ensure configuration is uptodate  # TODO change to use template
+      lineinfile:
+        line: "
+        {
+          \"concert_gateway_url\":\"http://{{ gateway_public_hostname }}:10602\",
+          \"base_url\": \"/\"
+        }
+        "
+        dest: "{{ balcony_conf_directory }}/balcony_config.json"
+        create: yes
+        state: present
+
+    # TODO : restart only if image or configuration changed
+    - name: Supervisorctl restart balcony-docker
       become: yes
       shell: "supervisorctl restart balcony-docker"
       # supervisorctl ansible module is buggy. using shell command instead.
