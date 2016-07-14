@@ -1,0 +1,43 @@
+---
+# WARNING : this will not work the first time :
+# Ref. https://github.com/ansible/ansible-modules-core/issues/921
+- name: Ensure the user is in docker group
+  become: yes
+  user:
+    name: "{{ balcony_docker_user }}"
+    groups: docker
+    append: yes
+
+
+- name: 'Ensure that the docker daemon is functional'
+  docker_ping:
+  retries: 5
+  delay: 10
+  until: result|success
+
+- name: Check we are logged into Docker Hub
+  docker_login:
+    username: "{{ balcony_dockerhub_user }}"
+    password: "{{ balcony_dockerhub_password }}"
+    email: "{{ balcony_dockerhub_email }}"
+
+- name: Ensure balcony docker image has the proper version
+  docker_image:
+    name: "{{ balcony_docker_image_name }}"
+    tag: "{{ balcony_docker_image_tag }}"
+    force: "{{ balcony_docker_image_force }}"
+
+# Needed ?
+#    - name: Ensure configuration directory exists
+#      file:
+#        path: "{{ balcony_docker_conf_volume_path }}"
+#        recurse: yes
+#        state: directory
+
+
+- name: Ensure balcony docker is configured.
+  template:
+    src: balcony_config.json.j2
+    dest: "{{ balcony_docker_config_path }}"
+    mode: 0644
+

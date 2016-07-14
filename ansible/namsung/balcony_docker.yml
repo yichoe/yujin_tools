@@ -36,15 +36,15 @@
   roles:
 
   # TODO : special role for balcony docker since we need configuration and all that...
-  - role: yujinrobot.yujin-docker
+  - role: yujinrobot.balcony-docker
     tags: balcony-docker
-    yujin_dockerhub_user: "{{ docker_hub_login }}"
-    yujin_dockerhub_password: "{{ docker_hub_password }}"
-    yujin_dockerhub_email: "{{ docker_hub_email }}"
-    yujin_docker_image:
-      name: yujinrobot/balcony
-      tag: devel
-      force: yes
+    balcony_dockerhub_user: "{{ docker_hub_login }}"
+    balcony_dockerhub_password: "{{ docker_hub_password }}"
+    balcony_dockerhub_email: "{{ docker_hub_email }}"
+    balcony_docker_image_tag: "{{ yujin_stream }}"
+    balcony_docker_image_force: yes
+    balcony_docker_gateway_hostname: "{{ gateway_public_hostname }}"
+    balcony_docker_conf_volume_path: "{{ balcony_conf_directory }}"
 
   - role: asmodehn.supervisor
     supervisor_version: apt
@@ -53,7 +53,7 @@
     supervisor_programs_present:
       balcony-docker:
         user: yujin
-        command: docker run -i --net=\"host\" -v "{{ balcony_conf_directory }}:/app/config/userConfig" yujinrobot/balcony:devel
+        command: docker run -i --net=\"host\" -v "{{ balcony_conf_directory }}:/app/config/userConfig" "yujinrobot/balcony:{{ yujin_stream }}"
         stopasgroup: true
         stopwaitsecs: 2
         killasgroup: true
@@ -62,24 +62,6 @@
         stderr_logfile: "/var/log/supervisor/balcony-docker.err.log"
 
   post_tasks:
-
-    - name: Ensure configuration directory exists
-      file:
-        path: "{{ balcony_conf_directory }}"
-        recurse: yes
-        state: directory
-
-    - name: Ensure configuration is uptodate  # TODO change to use template
-      lineinfile:
-        line: "
-        {
-          \"concert_gateway_url\":\"http://{{ gateway_public_hostname }}:10602\",
-          \"base_url\": \"/\"
-        }
-        "
-        dest: "{{ balcony_conf_directory }}/balcony_config.json"
-        create: yes
-        state: present
 
     # TODO : restart only if image or configuration changed
     - name: Supervisorctl restart balcony-docker

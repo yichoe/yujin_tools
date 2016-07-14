@@ -1,0 +1,2 @@
+---
+gateway_docker_config_path: "{{ gateway_docker_conf_volume_path }}/rocon_gateway_config.json"

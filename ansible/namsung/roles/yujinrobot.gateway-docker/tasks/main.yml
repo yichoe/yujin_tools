@@ -1,0 +1,41 @@
+---
+# WARNING : this will not work the first time :
+# Ref. https://github.com/ansible/ansible-modules-core/issues/921
+- name: Ensure the user is in docker group
+  become: yes
+  user:
+    name: "{{ gateway_docker_user }}"
+    groups: docker
+    append: yes
+
+
+- name: 'Ensure that the docker daemon is functional'
+  docker_ping:
+  retries: 5
+  delay: 10
+  until: result|success
+
+- name: Check we are logged into Docker Hub
+  docker_login:
+    username: "{{ gateway_dockerhub_user }}"
+    password: "{{ gateway_dockerhub_password }}"
+    email: "{{ gateway_dockerhub_email }}"
+
+- name: Ensure docker image has the proper version
+  docker_image:
+    name: "{{ gateway_docker_image_name }}"
+    tag: "{{ gateway_docker_image_tag }}"
+    force: "{{ gateway_docker_image_force }}"
+
+# Needed ?
+#    - name: Ensure configuration directory exists
+#      file:
+#        path: "{{ gateway_docker_conf_volume_path }}"
+#        recurse: yes
+#        state: directory
+
+- name: Ensure gateway docker is configured.
+  template:
+    src: rocon_gateway_config.json.j2
+    dest: "{{ gateway_docker_config_path }}"
+    mode: 0644

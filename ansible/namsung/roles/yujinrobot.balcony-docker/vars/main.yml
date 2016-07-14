@@ -1,0 +1,2 @@
+---
+balcony_docker_config_path: "{{ balcony_docker_conf_volume_path }}/balcony_config.json"

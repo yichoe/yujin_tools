@@ -1,0 +1,13 @@
+---
+gateway_docker_user: yujin
+gateway_docker_image_name: yujinrobot/rocon_api_gateway
+gateway_docker_image_tag: latest
+gateway_docker_image_force: yes
+gateway_docker_conf_volume_path: /opt/groot/gateway
+gateway_docker_flower_public_hostname: concert  # TODO : should be {{ inventory_hostname }} to default to local host (as seen from outside)
+gateway_docker_scheduler_public_hostname: concert  # TODO : should be {{ inventory_hostname }} to default to local host (as seen from outside)
+gateway_docker_rostful_public_hostname: concert  # TODO : should be {{ inventory_hostname }} to default to local host (as seen from outside)
+gateway_docker_reporter_public_hostname: concert  # TODO : should be {{ inventory_hostname }} to default to local host (as seen from outside)
+
+#TODO :
+#gateway_docker_externally_managed: false # by default manage it with docker. otherwise let another process manager deal with it.
