@@ -69,3 +69,12 @@
   args:
      executable: /bin/bash
   changed_when: false  # we can probably ignore this, since changes would come from a change in previous task
+
+- name: Ensure groot directory exists and is accessible by yujin.
+  file:
+    path: "/opt/groot"
+    state: directory
+    mode: 0744
+    owner: yujin
+    group: yujin
+  become: yes

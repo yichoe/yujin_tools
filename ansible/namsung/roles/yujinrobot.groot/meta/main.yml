@@ -12,3 +12,6 @@ galaxy_info:
 
 dependencies:
   - role: yujinrobot.yujin
+  - role: geerlingguy.redis
+    become: yes
+    redis_bind_interface: 0.0.0.0

@@ -1,6 +1,7 @@
 ---
 - src: geerlingguy.ntp
 - src: geerlingguy.nginx
+- src: geerlingguy.redis
 
 # - src: tersmitten.supervisor
 
