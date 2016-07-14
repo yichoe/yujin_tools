@@ -37,7 +37,7 @@
           try_files $uri $uri/ =404;
         }
         location /balcony/ {
-          proxy_pass http://127.0.0.1:4000;
+          proxy_pass http://127.0.0.1:4000/;
         }
         location /rostful {
           proxy_set_header Host $host;
