@@ -44,6 +44,7 @@
     balcony_docker_image_tag: "{{ yujin_stream }}"
     balcony_docker_image_force: yes
     balcony_docker_gateway_hostname: "{{ gateway_public_hostname }}"
+    balcony_docker_base_url: "/balcony/"
     balcony_docker_conf_volume_path: "{{ balcony_conf_directory }}"
 
   - role: asmodehn.supervisor

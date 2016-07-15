@@ -5,6 +5,7 @@ balcony_docker_image_force: yes
 
 balcony_docker_user: yujin
 balcony_docker_gateway_hostname: concert  # TODO : should be {{ inventory_hostname }} to default to local host (as seen from outside)
+balcony_docker_base_url: "/balcony/"
 balcony_docker_conf_volume_path: /opt/groot/balcony/
 
 #TODO :
