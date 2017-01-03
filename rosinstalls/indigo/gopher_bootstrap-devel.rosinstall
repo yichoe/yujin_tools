@@ -57,5 +57,8 @@
 # until we have fixes for the service unloading problem - https://github.com/ros/diagnostics/issues/50
 - git: { local-name: 'diagnostics',           version: 'handling_unloading_properly', uri: 'https://github.com/yujinrobot/diagnostics.git'}
 
+# Until ROS release. check http://repositories.ros.org/status_page/ros_indigo_default.html?q=ftputil
+- git: { local-name: 'ftputil',               version: 'release/indigo/ftputil', uri: 'https://github.com/asmodehn/ftputil-rosrelease.git'}
+
 # Documentation about the groot workspaces
 - git: { local-name: 'groot_workspaces', version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/groot_workspaces.git'}
