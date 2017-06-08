@@ -48,7 +48,7 @@ _catkin: 'https://raw.github.com/yichoe/yujin_tools/kinetic-xenial/rosinstalls/k
 
 # ros core
 catkin: [_catkin]
-ecto-devel: 'https://raw.github.com/yichoe/yujin_tools/kinetic-xenial/rosinstalls/indigo/ecto-devel.rosinstall'
+ecto-devel: 'https://raw.github.com/yichoe/yujin_tools/kinetic-xenial/rosinstalls/kinetic/ecto-devel.rosinstall'
 ecto-stable: 'https://raw.github.com/yichoe/yujin_tools/kinetic-xenial/rosinstalls/indigo/ecto-stable.rosinstall'
 yaml_cpp: 'https://raw.github.com/yichoe/yujin_tools/kinetic-xenial/rosinstalls/indigo/yaml_cpp.rosinstall'
 
