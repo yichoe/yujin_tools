@@ -27,9 +27,9 @@
 # - git: {local-name: message_multiplexing, version: indigo, uri: 'https://github.com/stonier/message_multiplexing.git'}
 # - git: {local-name: nanomsg, version: indigo, uri: 'https://github.com/stonier/nanomsg.git'}
 
+- git: {local-name: qglv_toolkit, version: devel, uri: 'https://github.com/yujinrobot/qglv_toolkit.git'}
 - git: {local-name: nanomsg, version: indigo, uri: 'https://github.com/stonier/nanomsg.git'}
 - git: {local-name: cv_backports, version: kinetic, uri: 'https://github.com/yujinrobot/cv_backports.git'}
 - git: {local-name: message_multiplexing, version: indigo, uri: 'https://github.com/stonier/message_multiplexing.git'}
 - git: {local-name: flatbuffers, version: indigo, uri: 'https://github.com/stonier/flatbuffers.git'}
-- git: {local-name: qglv_toolkit, version: devel, uri: 'https://github.com/yujinrobot/qglv_toolkit.git'}
 
