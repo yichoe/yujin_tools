@@ -15,7 +15,7 @@
 # Library to filter the raw data from the new bosch gyro
 - git: {local-name: imu,                    version: devel, uri: 'https://bitbucket.org/yujinrobot/imu.git'}
 # Supporting qglv widgets and algorithms to create dslam viewers
-- git: {local-name: qglv_toolkit,           version: devel, uri: 'https://github.com/yichoe/qglv_toolkit.git'}
+- git: {local-name: qglv_toolkit,           version: devel, uri: 'https://github.com/yujinrobot/qglv_toolkit.git'}
 # Localisation framework, includes initialisation methods with AR markers
 - git: {local-name: elf,                    version: devel, uri: 'https://bitbucket.org/yujinrobot/elf.git'}
 
