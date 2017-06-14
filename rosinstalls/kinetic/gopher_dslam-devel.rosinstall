@@ -28,5 +28,5 @@
 - git: {local-name: nanomsg, version: indigo, uri: 'https://github.com/stonier/nanomsg.git'}
 
 - git: {local-name: cv_backports, version: kinetic, uri: 'https://github.com/yujinrobot/cv_backports.git'}
-- git: {local-name: flatbuffers, version: indigo, uri: 'https://github.com/stonier/flatbuffers.git'}
+- git: {local-name: flatbuffers, version: indigo, uri: 'https://github.com/yujinrobot/flatbuffers.git'}
 
