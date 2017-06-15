@@ -18,7 +18,7 @@
 # Customised down sampling package
 - git: {local-name: 'downsampler',             version: 'devel', uri: 'https://github.com/yujinrobot/downsampler.git'}
 # Any important (especially IP sensitive) navigation code in here, especially local and global planning packages.
-- git: {local-name: 'gopher_navigation',       version: 'devel', uri: 'https://bitbucket.org/yujinrobot/gopher_navigation.git'}
+- git: {local-name: 'gopher_navigation',       version: 'devel', uri: 'https://bitbucket.org/yichoe/gopher_navigation.git'}
 # Any not so important navigation packages - docking, elevators, simple motions, etc.
 - git: {local-name: 'gopher_motion_control',   version: 'devel', uri: 'https://bitbucket.org/yujinrobot/gopher_motion_control.git'}
 # Forks of the open source ROS navistack
