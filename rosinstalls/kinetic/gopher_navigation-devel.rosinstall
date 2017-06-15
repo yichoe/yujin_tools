@@ -32,4 +32,4 @@
 # Binary Repos - from our collaboration with KoDae on the medi cart project, they are working on elevators
 - git: {local-name: 'kuns',                    version: 'devel', uri: 'https://bitbucket.org/yujinrobot/kuns.git'}
 
-- git: {local-name: 'sbpl',                    version: 'master', uri: 'https://github.com/sbpl/sbpl.git'}
+- git: {local-name: 'sbpl',                    version: 'kinetic', uri: 'https://github.com/yujinrobot/sbpl.git'}
