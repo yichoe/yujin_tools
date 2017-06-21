@@ -60,7 +60,7 @@ ecl-stable: 'https://raw.github.com/yichoe/yujin_tools/kinetic-xenial/rosinstall
 hello: 'https://raw.github.com/yichoe/yujin_tools/kinetic-xenial/rosinstalls/kinetic/hello.rosinstall'
 qt_ros: 'https://raw.github.com/yichoe/yujin_tools/kinetic-xenial/rosinstalls/kinetic/qt_ros.rosinstall'
 respawn: 'https://raw.github.com/yichoe/yujin_tools/kinetic-xenial/rosinstalls/kinetic/respawn.rosinstall'
-system_deb_builder: 'https://bitbucket.org/yujinrobot/system_deb_builder/raw/indigo/system_deb_builder.rosinstall'
+system_deb_builder: 'https://bitbucket.org/yujinrobot/system_deb_builder/raw/kinetic/system_deb_builder.rosinstall'
 
 # android
 android_complete: [android_core, android_interactions]
