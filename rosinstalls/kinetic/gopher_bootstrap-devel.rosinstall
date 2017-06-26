@@ -64,3 +64,8 @@
 
 # Documentation about the groot workspaces
 - git: { local-name: 'groot_workspaces', version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/groot_workspaces.git'}
+
+- git: { local-name: 'smart_battery_msgs', version: 'master', uri: 'https://github.com/ros-drivers/smart_battery_msgs.git'}
+- git: { local-name: 'pyros_common', version: '0.4.2-0', uri: 'https://github.com/asmodehn/pyros-common-rosrelease.git'}
+- git: [ local-name: 'ftputil', version: '3.3.0-2', uri: 'https://github.com/asmodehn/ftputil-rosrelease.git'}
+
