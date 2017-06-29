@@ -68,7 +68,7 @@
 - git: { local-name: 'smart_battery_msgs', version: 'master', uri: 'https://github.com/ros-drivers/smart_battery_msgs.git'}
 - git: { local-name: 'pyros_common', version: 'release/indigo/pyros_common', uri: 'https://github.com/asmodehn/pyros-common-rosrelease.git'}
 #- git: { local-name: 'ftputil', version: 'release/indigo/ftputil', uri: 'https://github.com/asmodehn/ftputil-rosrelease.git'}
-- git: { local-name: 'ftputil', version: 'release/kinetic/python-ftputil', uri: 'https://github.com/asmodehn/ftputil-rosrelease.git'}
+- git: { local-name: 'python-ftputil', version: 'release/kinetic/python-ftputil', uri: 'https://github.com/asmodehn/ftputil-rosrelease.git'}
 - git: { local-name: 'python-watchdog', version: 'release/indigo/python-watchdog', uri: 'https://github.com/yotabits/python-watchdog-release.git'}
 - git: { local-name: 'python-pathtools', version: 'release/indigo/python-pathtools', uri: 'https://github.com/yotabits/python-pathtools-release.git'}
 
