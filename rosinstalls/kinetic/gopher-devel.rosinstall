@@ -13,7 +13,7 @@
 - git: { local-name: 'gopher_calibration', version: 'devel',         uri: 'https://bitbucket.org/yujinrobot/gopher_calibration.git'}
 
 # Drivers
-- git: { local-name: 'somanet_driver',     version: 'devel',         uri: 'https://bitbucket.org/yujinrobot/somanet_driver.git'}
+- git: { local-name: 'somanet_driver',     version: 'devel',         uri: 'https://bitbucket.org/yichoe/somanet_driver.git'}
 - git: { local-name: 'rplidar_ros',        version: 'devel',         uri: 'https://github.com/yujinrobot/rplidar_ros.git'}
 - git: { local-name: 'rplidar_extras',     version: 'devel',         uri: 'https://github.com/yujinrobot/rplidar_extras.git'}
 - git: { local-name: 'astra_camera',       version: 'filter_library_custom', uri: 'https://github.com/yujinrobot/ros_astra_camera.git'}
