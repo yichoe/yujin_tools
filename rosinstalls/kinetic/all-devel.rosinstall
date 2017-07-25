@@ -1,0 +1,86 @@
+# ecl
+- git: { local-name: 'ecl_tools',                     version: 'devel', uri:'https://github.com/stonier/ecl_tools.git'}
+- git: { local-name: 'ecl_lite',                      version: 'devel', uri:'https://github.com/stonier/ecl_lite.git'}
+- git: { local-name: 'ecl_core',                      version: 'devel', uri:'https://github.com/stonier/ecl_core.git'}
+- git: { local-name: 'ecl_navigation',                version: 'devel', uri:'https://github.com/stonier/ecl_navigation.git'}
+- git: { local-name: 'ecl_manipulation',              version: 'devel', uri:'https://github.com/stonier/ecl_manipulation.git'}
+# messages
+- git: { local-name: 'environment_interactions_msgs', version: 'devel', uri: 'https://bitbucket.org/yujinrobot/environment_interactions_msgs.git'}
+- git: { local-name: 'gopher_msgs',                   version: 'devel', uri: 'https://bitbucket.org/yujinrobot/gopher_msgs.git'}
+- git: { local-name: 'py_trees_msgs',                 version: 'devel', uri: 'https://github.com/yujinrobot/py_trees_msgs.git'}
+- git: { local-name: 'rocon_msgs',                    version: 'devel', uri: 'https://github.com/robotics-in-concert/rocon_msgs.git'}
+- git: { local-name: 'somanet_msgs',                  version: 'devel', uri: 'https://bitbucket.org/yujinrobot/somanet_msgs.git'}
+- git: { local-name: 'yocs_msgs',                     version: 'devel', uri: 'https://github.com/yujinrobot/yocs_msgs.git'}
+- git: { local-name: 'feed_the_troll_msgs',           version: 'devel', uri: 'https://github.com/stonier/feed_the_troll_msgs.git'}
+- git: { local-name: 'gopher_configuration',          version: 'devel', uri: 'https://bitbucket.org/yujinrobot/gopher_configuration.git'}
+# ecto
+- git: {local-name: ecto,        version: devel, uri: 'https://github.com/stonier/ecto.git'}
+- git: {local-name: ecto_ros,    version: devel, uri: 'https://github.com/stonier/ecto_ros.git'}
+- git: {local-name: ecto_opencv, version: devel, uri: 'https://github.com/stonier/ecto_opencv.git'}
+# dslam
+- git: {local-name: dslam_bag,              version: devel, uri: 'https://bitbucket.org/yujinrobot/dslam_bag.git'}
+- git: {local-name: dslam,                  version: devel, uri: 'https://bitbucket.org/yujinrobot/dslam.git'}
+- git: {local-name: dslam_desktop,          version: devel, uri: 'https://bitbucket.org/yichoe/dslam_desktop.git'}
+- git: {local-name: dslam_map_version,      version: devel, uri: 'https://bitbucket.org/yujinrobot/dslam_map_version.git'}
+- git: {local-name: imu,                    version: devel, uri: 'https://bitbucket.org/yujinrobot/imu.git'}
+- git: {local-name: qglv_toolkit,           version: devel, uri: 'https://github.com/yujinrobot/qglv_toolkit.git'}
+- git: {local-name: elf,                    version: devel, uri: 'https://bitbucket.org/yichoe/elf.git'}
+- git: {local-name: 'sophus_ros_toolkit',      version: 'devel', uri: 'https://github.com/stonier/sophus_ros_toolkit.git'}
+- git: {local-name: message_multiplexing, version: indigo, uri: 'https://github.com/stonier/message_multiplexing.git'}
+- git: {local-name: nanomsg, version: indigo, uri: 'https://github.com/stonier/nanomsg.git'}
+- git: {local-name: flatbuffers, version: kinetic, uri: 'https://github.com/yujinrobot/flatbuffers.git'}
+# navigation
+- git: {local-name: 'ar_track_alvar',          version: 'kinetic-devel', uri: 'https://github.com/yichoe/ar_track_alvar.git'}
+- git: {local-name: 'cost_map',                version: 'devel', uri: 'https://github.com/yujinrobot/cost_map.git'}
+- git: {local-name: 'grid_map',                version: 'devel', uri: 'https://github.com/yujinrobot/grid_map.git'}
+- git: {local-name: 'depthimage_to_laserscan', version: 'devel', uri: 'https://github.com/yujinrobot/depthimage_to_laserscan.git'}
+- git: {local-name: 'depth_calibration',       version: 'devel', uri: 'https://github.com/yujinrobot/depth_calibration.git'}
+- git: {local-name: 'downsampler',             version: 'devel', uri: 'https://github.com/yujinrobot/downsampler.git'}
+- git: {local-name: 'gopher_navigation',       version: 'devel', uri: 'https://bitbucket.org/yichoe/gopher_navigation.git'}
+- git: {local-name: 'gopher_motion_control',   version: 'devel', uri: 'https://bitbucket.org/yichoe/gopher_motion_control.git'}
+- git: {local-name: 'navigation',              version: 'devel', uri: 'https://github.com/yujinrobot/navigation.git'}
+- git: {local-name: 'navigation_layers',       version: 'devel', uri: 'https://github.com/yujinrobot/navigation_layers.git'}
+- git: {local-name: 'obstacle_detection',      version: 'devel', uri: 'https://bitbucket.org/yujinrobot/obstacle_detection.git'}
+- git: {local-name: 'yujin_ocs',               version: 'devel', uri: 'https://github.com/yujinrobot/yujin_ocs.git'}
+- git: {local-name: 'kuns',                    version: 'devel', uri: 'https://bitbucket.org/yichoe/kuns.git'}
+- git: {local-name: 'sbpl',                    version: 'kinetic', uri: 'https://github.com/yujinrobot/sbpl.git'}
+# bootstrap
+- git: { local-name: 'feed_the_troll',        version: 'devel',        uri: 'https://github.com/stonier/feed_the_troll.git'}
+- git: { local-name: 'rocon_tools',           version: 'devel',        uri: 'https://github.com/robotics-in-concert/rocon_tools.git'}
+- git: { local-name: 'rocon_app_platform',    version: 'devel',        uri: 'https://github.com/robotics-in-concert/rocon_app_platform.git'}
+- git: { local-name: 'gopher_rapps',          version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_rapps.git'}
+- git: { local-name: 'gopher_version',        version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_version.git'}
+- git: { local-name: 'gopher_common',         version: 'kinetic-devel', uri: 'https://bitbucket.org/yujinrobot/gopher_common.git'}
+- git: { local-name: 'gopher_jobbroker',      version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_jobbroker.git'}
+- git: { local-name: 'gopher_web_ui',         version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_web_ui.git'}
+- git: { local-name: 'gopher_robot_restful',  version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_robot_restful'}
+- git: { local-name: 'gopher_web_releases',   version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_web_releases'}
+- git: { local-name: 'gopher_crazy_hospital', version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_crazy_hospital.git'}
+- git: { local-name: 'py_trees_suite',        version: 'devel',        uri: 'https://github.com/yujinrobot/py_trees_suite'}
+- git: { local-name: 'rostful',               version: 'gopher_hotfix', uri: 'https://github.com/asmodehn/rostful.git'}
+- git: { local-name: 'catkin_pip',            version: 'devel', uri: 'https://github.com/asmodehn/catkin_pip.git'}
+- git: { local-name: 'pyros_interfaces_ros',  version: 'master', uri: 'https://github.com/asmodehn/pyros-rosinterface.git'}
+- git: { local-name: 'pyros_schemas',         version: 'master', uri: 'https://github.com/asmodehn/pyros-schemas.git'}
+- git: { local-name: 'pyros_msgs',            version: 'master', uri: 'https://github.com/asmodehn/pyros-msgs.git'}
+- git: { local-name: 'rocon_multimaster',     version: 'devel',        uri: 'https://github.com/robotics-in-concert/rocon_multimaster.git'}
+- git: { local-name: 'yujin_ansible',     version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/yujin_ansible'}
+- git: { local-name: 'elevator_interactions', version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/elevator_interactions.git'}
+- git: { local-name: 'rosdoc_lite',           version: 'master',       uri: 'https://github.com/yujinrobot/rosdoc_lite.git'}
+- git: { local-name: 'audio_common',          version: 'volume_fix_branch',       uri: 'https://github.com/yujinrobot/audio_common.git'}
+- git: { local-name: 'diagnostics',           version: 'handling_unloading_properly', uri: 'https://github.com/yujinrobot/diagnostics.git'}
+- git: { local-name: 'groot_workspaces', version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/groot_workspaces.git'}
+- git: { local-name: 'smart_battery_msgs', version: 'master', uri: 'https://github.com/ros-drivers/smart_battery_msgs.git'}
+# gopher
+- git: { local-name: 'gopher',             version: 'kinetic-devel', uri: 'https://bitbucket.org/yujinrobot/gopher.git'}
+- git: { local-name: 'gopher_calibration', version: 'devel',         uri: 'https://bitbucket.org/yujinrobot/gopher_calibration.git'}
+- git: { local-name: 'somanet_driver',     version: 'devel',         uri: 'https://bitbucket.org/yichoe/somanet_driver.git'}
+- git: { local-name: 'rplidar_ros',        version: 'devel',         uri: 'https://github.com/yujinrobot/rplidar_ros.git'}
+- git: { local-name: 'rplidar_extras',     version: 'devel',         uri: 'https://github.com/yujinrobot/rplidar_extras.git'}
+- git: { local-name: 'astra_camera',       version: 'filter_library_custom', uri: 'https://github.com/yujinrobot/ros_astra_camera.git'}
+- git: { local-name: 'somanet_firmware',   version: 'devel', uri: 'https://bitbucket.org/yujinrobot/somanet_firmware.git'}
+# desktop
+- git: { local-name: 'gopher_desktop', version: 'kinetic-devel', uri: 'https://bitbucket.org/yujinrobot/gopher_desktop.git'}
+- git: { local-name: 'rocon_qt_gui',   version: 'devel', uri: 'https://github.com/robotics-in-concert/rocon_qt_gui.git'}
+- git: { local-name: 'rqt_wrapper',    version: 'devel', uri: 'https://github.com/stonier/rqt_wrapper.git'}
+- git: { local-name: 'rqt_py_trees',   version: 'devel', uri: 'https://github.com/yujinrobot/rqt_py_trees.git'}
+

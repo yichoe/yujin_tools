@@ -102,6 +102,8 @@ rosjava_minimal: 'https://raw.github.com/rosjava/rosjava/kinetic/rosjava_minimal
 rosjava_messages: 'https://raw.github.com/rosjava/rosjava/kinetic/rosjava_messages.rosinstall'
 world_canvas: 'https://raw.github.com/yichoe/yujin_tools/kinetic-xenial/rosinstalls/kinetic/world_canvas.rosinstall'
 
+all-devel: 'https://raw.github.com/yichoe/yujin_tools/kinetic-xenial/rosinstalls/kinetic/all-devel.rosinstall'
+
 # graveyarding
 ecto: [ecto-devel]
 gopher_dslam: [gopher_dslam-devel]
