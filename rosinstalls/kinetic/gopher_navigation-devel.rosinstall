@@ -20,7 +20,7 @@
 # Any important (especially IP sensitive) navigation code in here, especially local and global planning packages.
 - git: {local-name: 'gopher_navigation',       version: 'devel', uri: 'https://bitbucket.org/yujinrobot/gopher_navigation.git'}
 # Any not so important navigation packages - docking, elevators, simple motions, etc.
-- git: {local-name: 'gopher_motion_control',   version: 'devel', uri: 'https://bitbucket.org/yichoe/gopher_motion_control.git'}
+- git: {local-name: 'gopher_motion_control',   version: 'devel', uri: 'https://bitbucket.org/yujinrobot/gopher_motion_control.git'}
 # Forks of the open source ROS navistack
 - git: {local-name: 'navigation',              version: 'devel', uri: 'https://github.com/yujinrobot/navigation.git'}
 - git: {local-name: 'navigation_layers',       version: 'devel', uri: 'https://github.com/yujinrobot/navigation_layers.git'}
@@ -30,7 +30,7 @@
 - git: {local-name: 'yujin_ocs',               version: 'devel', uri: 'https://github.com/yujinrobot/yujin_ocs.git'}
 
 # Binary Repos - from our collaboration with KoDae on the medi cart project, they are working on elevators
-- git: {local-name: 'kuns',                    version: 'devel', uri: 'https://bitbucket.org/yichoe/kuns.git'}
+- git: {local-name: 'kuns',                    version: 'devel', uri: 'https://bitbucket.org/yujinrobot/kuns.git'}
 
 #- git: {local-name: 'sbpl',                    version: 'kinetic', uri: 'https://github.com/yujinrobot/sbpl.git'}
 #- git: {local-name: 'sbpl',                    version: 'release/indigo/sbpl', uri: 'https://github.com/ros-gbp/sbpl-release.git'}
