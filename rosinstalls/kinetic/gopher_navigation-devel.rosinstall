@@ -4,7 +4,7 @@
 #
 
 # Fork of the open source release for ar markers
-- git: {local-name: 'ar_track_alvar',          version: 'kinetic-devel', uri: 'https://github.com/yichoe/ar_track_alvar.git'}
+- git: {local-name: 'ar_track_alvar',          version: 'devel', uri: 'https://github.com/yujinrobot/ar_track_alvar.git'}
 # Our own costmap equivalent of the very nice swiss grid map library, forked to yujinrobot from stonier to protect against changes
 - git: {local-name: 'cost_map',                version: 'devel', uri: 'https://github.com/yujinrobot/cost_map.git'}
 # Fork of the very nice swiss grid maps
@@ -17,6 +17,7 @@
 - git: {local-name: 'depth_calibration',       version: 'devel', uri: 'https://github.com/yujinrobot/depth_calibration.git'}
 # Customised down sampling package
 - git: {local-name: 'downsampler',             version: 'devel', uri: 'https://github.com/yujinrobot/downsampler.git'}
+- git: {local-name: 'plane_calibration',       version: 'devel', uri: 'https://github.com/yujinrobot/plane_calibration.git'}
 # Any important (especially IP sensitive) navigation code in here, especially local and global planning packages.
 - git: {local-name: 'gopher_navigation',       version: 'devel', uri: 'https://bitbucket.org/yujinrobot/gopher_navigation.git'}
 # Any not so important navigation packages - docking, elevators, simple motions, etc.
@@ -32,5 +33,3 @@
 # Binary Repos - from our collaboration with KoDae on the medi cart project, they are working on elevators
 - git: {local-name: 'kuns',                    version: 'devel', uri: 'https://bitbucket.org/yujinrobot/kuns.git'}
 
-#- git: {local-name: 'sbpl',                    version: 'kinetic', uri: 'https://github.com/yujinrobot/sbpl.git'}
-#- git: {local-name: 'sbpl',                    version: 'release/indigo/sbpl', uri: 'https://github.com/ros-gbp/sbpl-release.git'}
