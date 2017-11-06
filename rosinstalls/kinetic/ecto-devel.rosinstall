@@ -9,8 +9,8 @@
 - git: {local-name: ecto_ros,    version: devel, uri: 'https://github.com/stonier/ecto_ros.git'}
 #- git: {local-name: ecto_ros,    version: master, uri: 'https://github.com/plasmodic/ecto_ros.git'}
 
-- git: {local-name: ecto_opencv, version: devel, uri: 'https://github.com/stonier/ecto_opencv.git'}
-#- git: {local-name: ecto_opencv, version: kinetic-devel, uri: 'https://github.com/yujinrobot/ecto_opencv.git'}
+#- git: {local-name: ecto_opencv, version: devel, uri: 'https://github.com/stonier/ecto_opencv.git'}
+- git: {local-name: ecto_opencv, version: kinetic-devel, uri: 'https://github.com/yujinrobot/ecto_opencv.git'}
 
 - git: {local-name: cv_backports, version: kinetic-devel, uri: 'https://github.com/yujinrobot/cv_backports.git'}
 - git: {local-name: xdot, version: master, uri: 'https://github.com/jbohren/xdot.git'}
